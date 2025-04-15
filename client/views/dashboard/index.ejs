@@ -1,0 +1,29 @@
+<%- include('../partials/header') %>
+
+<div class="dashboard-container">
+  <h1>Welcome, <%= user.username %></h1>
+  
+  <div class="dashboard-stats">
+    <div class="stat-card">
+      <h3>Reading Progress</h3>
+      <p>You haven't started reading any books yet.</p>
+    </div>
+    
+    <div class="stat-card">
+      <h3>Word Bank</h3>
+      <p>You haven't added any words to your bank yet.</p>
+    </div>
+  </div>
+  
+  <div class="dashboard-actions">
+    <a href="/books" class="btn btn-primary">Browse Books</a>
+    <a href="/word-bank" class="btn btn-secondary">My Word Bank</a>
+  </div>
+  
+  <div class="book-list-section">
+    <h2>Available Books</h2>
+    <p>No books available yet. Check back soon!</p>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

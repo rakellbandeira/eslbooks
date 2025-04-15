@@ -5,6 +5,7 @@ const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
 const cookieParser = require('cookie-parser');
+const authenticate = require('./middleware/authentication');
 
 // Load environment variables
 dotenv.config();
@@ -20,6 +21,7 @@ require('./config/db');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(authenticate);
 
 // Set up session
 app.use(session({
