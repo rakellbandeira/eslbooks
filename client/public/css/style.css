@@ -271,7 +271,7 @@
   }
 
 
-  
+
 /* Dashboard */
 .dashboard-container {
     padding: 30px;
@@ -316,4 +316,308 @@
   .book-list-section h2 {
     margin-bottom: 20px;
     color: #333;
+  }
+
+
+/* Book cards */
+.book-list {
+    margin-top: 30px;
+  }
+  
+  .card {
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-img-top {
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .progress {
+    height: 10px;
+    border-radius: 5px;
+    background-color: #e9ecef;
+  }
+  
+  .progress-bar {
+    background-color: #0066cc;
+    border-radius: 5px;
+  }
+  
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  /* Admin book management */
+  .current-image {
+    margin-bottom: 15px;
+  }
+  
+  .current-image img {
+    max-width: 200px;
+    border-radius: 4px;
+  }
+  
+  .form-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* Reader */
+  .reader-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .reader-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .reader-header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .reader-controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .page-navigation {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .page-info {
+    margin: 0 10px;
+    font-weight: 500;
+  }
+  
+  .reader-content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .page-image {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .page-image img {
+    max-width: 100%;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .page-text {
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+  
+  .selectable-word {
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+  }
+  
+  .selectable-word:hover {
+    background-color: #e9ecef;
+  }
+  
+  .selectable-word.selected {
+    background-color: #cce5ff;
+  }
+  
+  .word-popup {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  .word-actions {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .translation {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .add-word-form {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    width: 300px;
+  }
+  
+  .add-word-form h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+  
+  .close-btn {
+    white-space: nowrap;
+  }
+
+
+
+/* Word Bank */
+.wordbank-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .search-form {
+    flex-grow: 1;
+    max-width: 500px;
+  }
+  
+  .alphabet-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 20px;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .alphabet-link {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .alphabet-link:hover {
+    background-color: #0066cc;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .letter-group {
+    margin-bottom: 40px;
+  }
+  
+  .letter-heading {
+    background-color: #0066cc;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+  
+  .empty-wordbank {
+    background-color: #f8f9fa;
+    padding: 30px;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .current-book {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .book-info {
+    flex-grow: 1;
+  }
+  
+  .book-info h4 {
+    margin-bottom: 15px;
+  }
+  
+
+
+  
+  /* Responsive adjustments*/
+  @media (max-width: 768px) {
+    .reader-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .reader-controls {
+      margin-top: 15px;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .page-navigation {
+      width: 100%;
+      justify-content: space-between;
+    }
+    
+    .page-text {
+      font-size: 16px;
+    }
+
+    .wordbank-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .search-form {
+        max-width: 100%;
+      }
+      
+      .alphabet-navigation {
+        justify-content: center;
+      }
   }

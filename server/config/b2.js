@@ -1,3 +1,4 @@
+// Import the B2 class properly
 const { B2 } = require('backblaze-b2');
 
 // Initialize B2
@@ -19,10 +20,15 @@ const initB2 = async () => {
 };
 
 // Function to upload file to B2
-const uploadToB2 = async (file) => {
+const uploadToB2 = async (file, folder = '') => {
   try {
     // Ensure B2 is authorized
     await b2.authorize();
+    
+    // Create filename with folder structure if provided
+    const fileName = folder 
+      ? `${folder}/${Date.now()}-${file.originalname.replace(/\s+/g, '-')}`
+      : `${Date.now()}-${file.originalname.replace(/\s+/g, '-')}`;
     
     // Get upload URL
     const { data: { uploadUrl, authorizationToken } } = await b2.getUploadUrl({
@@ -33,7 +39,7 @@ const uploadToB2 = async (file) => {
     const { data } = await b2.uploadFile({
       uploadUrl,
       uploadAuthToken: authorizationToken,
-      fileName: `${Date.now()}-${file.originalname}`,
+      fileName,
       data: file.buffer,
       contentType: file.mimetype
     });
@@ -46,7 +52,47 @@ const uploadToB2 = async (file) => {
   }
 };
 
+// Function to delete file from B2
+const deleteFromB2 = async (fileUrl) => {
+  try {
+    // Extract filename from URL
+    const fileName = fileUrl.split(`/${process.env.B2_BUCKET_NAME}/`)[1];
+    
+    if (!fileName) {
+      throw new Error('Invalid file URL');
+    }
+    
+    // Ensure B2 is authorized
+    await b2.authorize();
+    
+    // Get file info to get file ID
+    const { data: files } = await b2.listFileNames({
+      bucketId: process.env.B2_BUCKET_ID,
+      startFileName: fileName,
+      maxFileCount: 1
+    });
+    
+    if (files.files.length === 0 || files.files[0].fileName !== fileName) {
+      throw new Error('File not found');
+    }
+    
+    const fileId = files.files[0].fileId;
+    
+    // Delete file
+    await b2.deleteFileVersion({
+      fileId,
+      fileName
+    });
+    
+    return true;
+  } catch (error) {
+    console.error('B2 delete error:', error);
+    throw error;
+  }
+};
+
 module.exports = {
   initB2,
-  uploadToB2
+  uploadToB2,
+  deleteFromB2
 };

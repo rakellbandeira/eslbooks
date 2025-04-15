@@ -1,0 +1,113 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <h1>Edit Book: <%= book.title %></h1>
+  
+  <%- include('../partials/messages') %>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <form action="/admin/books/edit/<%= book._id %>" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" class="form-control" value="<%= book.title %>" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" class="form-control" rows="4" required><%= book.description %></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="level">Level</label>
+          <select id="level" name="level" class="form-control" required>
+            <option value="Beginner" <%= book.level === 'Beginner' ? 'selected' : '' %>>Beginner</option>
+            <option value="Intermediate" <%= book.level === 'Intermediate' ? 'selected' : '' %>>Intermediate</option>
+            <option value="Advanced" <%= book.level === 'Advanced' ? 'selected' : '' %>>Advanced</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Current Cover Image</label>
+          <div class="current-image">
+            <img src="<%= book.coverImage %>" alt="<%= book.title %>" class="img-thumbnail">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="coverImage">New Cover Image (Optional)</label>
+          <input type="file" id="coverImage" name="coverImage" class="form-control-file" accept="image/*">
+          <small class="form-text text-muted">Max file size: 5MB. Allowed formats: JPEG, PNG, GIF, WebP.</small>
+        </div>
+        
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" id="isActive" name="isActive" class="form-check-input" <%= book.isActive ? 'checked' : '' %>>
+            <label for="isActive" class="form-check-label">Active (visible to users)</label>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Update Book</button>
+          <a href="/admin/books" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+    
+    <div class="col-md-6">
+      <h2>Book Pages</h2>
+      
+      <div class="pages-list">
+        <% if (pages && pages.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Page #</th>
+                  <th>Image</th>
+                  <th>Text</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% pages.forEach(page => { %>
+                  <tr>
+                    <td><%= page.pageNumber %></td>
+                    <td><img src="<%= page.imageUrl %>" alt="Page <%= page.pageNumber %>" class="img-thumbnail" style="max-width: 100px;"></td>
+                    <td><%= page.text.length > 50 ? page.text.substring(0, 50) + '...' : page.text %></td>
+                    <td>
+                      <a href="/admin/books/page/delete/<%= page._id %>/<%= book._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this page? This action cannot be undone.')">Delete</a>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <p>No pages added yet.</p>
+        <% } %>
+      </div>
+      
+      <h3>Add New Page</h3>
+      <form action="/admin/books/page/add" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="bookId" value="<%= book._id %>">
+        
+        <div class="form-group">
+          <label for="pageImage">Page Image</label>
+          <input type="file" id="pageImage" name="pageImage" class="form-control-file" accept="image/*" required>
+          <small class="form-text text-muted">Max file size: 5MB. Allowed formats: JPEG, PNG, GIF, WebP.</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="text">Page Text</label>
+          <textarea id="text" name="text" class="form-control" rows="4" required></textarea>
+          <small class="form-text text-muted">This text will be displayed on the page and will be selectable by users.</small>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Add Page</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

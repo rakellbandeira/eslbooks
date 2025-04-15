@@ -1,0 +1,87 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <h1>My Word Bank</h1>
+  
+  <%- include('../partials/messages') %>
+  
+  <div class="wordbank-controls">
+    <form action="/word-bank" method="GET" class="search-form">
+      <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Search words..." value="<%= search %>">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-primary">Search</button>
+          <% if (search) { %>
+            <a href="/word-bank" class="btn btn-secondary">Clear</a>
+          <% } %>
+        </div>
+      </div>
+    </form>
+    
+    <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+  </div>
+  
+  <div class="wordbank-content">
+    <% if (words && words.length > 0) { %>
+      <% if (Object.keys(groupedWords).length > 0) { %>
+        <div class="alphabet-navigation">
+          <% for (const letter of Object.keys(groupedWords).sort()) { %>
+            <a href="#letter-<%= letter %>" class="alphabet-link"><%= letter %></a>
+          <% } %>
+        </div>
+        
+        <div class="words-list">
+          <% for (const letter of Object.keys(groupedWords).sort()) { %>
+            <div class="letter-group" id="letter-<%= letter %>">
+              <h2 class="letter-heading"><%= letter %></h2>
+              
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Word</th>
+                      <th>Translation</th>
+                      <th>Source</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% groupedWords[letter].forEach(word => { %>
+                      <tr>
+                        <td><%= word.word %></td>
+                        <td><%= word.translation %></td>
+                        <td>
+                          <% if (word.bookId) { %>
+                            <%= word.bookId.title %>
+                          <% } else { %>
+                            N/A
+                          <% } %>
+                        </td>
+                        <td>
+                          <div class="btn-group">
+                            <a href="/word-bank/edit/<%= word._id %>" class="btn btn-sm btn-primary">Edit</a>
+                            <a href="/word-bank/delete/<%= word._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this word?')">Delete</a>
+                          </div>
+                        </td>
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      <% } %>
+    <% } else { %>
+      <div class="empty-wordbank">
+        <% if (search) { %>
+          <p>No matching words found. Try a different search term.</p>
+        <% } else { %>
+          <p>Your word bank is empty. Start reading books and add words to your bank!</p>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

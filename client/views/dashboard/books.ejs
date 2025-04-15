@@ -1,0 +1,50 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <h1>Browse Books</h1>
+  
+  <%- include('../partials/messages') %>
+  
+  <div class="dashboard-actions">
+    <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+  </div>
+  
+  <div class="book-list">
+    <% if (books && books.length > 0) { %>
+      <div class="row">
+        <% books.forEach(book => { %>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="<%= book.coverImage %>" class="card-img-top" alt="<%= book.title %>">
+              <div class="card-body">
+                <h5 class="card-title"><%= book.title %></h5>
+                <p class="card-text"><%= book.description.length > 100 ? book.description.substring(0, 100) + '...' : book.description %></p>
+                <p class="card-text"><strong>Level:</strong> <%= book.level %></p>
+                
+                <% if (book.percentComplete > 0) { %>
+                    <div class="progress mb-3">
+                        <%= const percent = book.percentComplete %>
+                      <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="<%= book.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(book.percentComplete) %>%</div>
+                    </div>
+                    <p class="card-text"><small class="text-muted">Page <%= book.currentPage %> of <%= book.pageCount %></small></p>
+                  <% } else { %>
+                    <p class="card-text"><small class="text-muted"><%= book.pageCount %> pages</small></p>
+                  <% } %>
+                  
+                  <a href="/books/read/<%= book._id %>" class="btn btn-primary btn-block">
+                    <%= book.percentComplete > 0 ? 'Continue Reading' : 'Start Reading' %>
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <div class="no-books">
+          <p>No books available yet. Check back soon!</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+  
+  <%- include('../partials/footer') %>

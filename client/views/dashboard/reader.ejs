@@ -1,0 +1,229 @@
+<%- include('../partials/header') %>
+
+<div class="reader-container">
+  <div class="reader-header">
+    <h1><%= book.title %></h1>
+    <div class="reader-controls">
+      <div class="page-navigation">
+        <% if (currentPage > 1) { %>
+          <a href="/books/read/<%= book._id %>?page=<%= currentPage - 1 %>" class="btn btn-primary">Previous Page</a>
+        <% } %>
+        
+        <span class="page-info">Page <%= currentPage %> of <%= totalPages %></span>
+        
+        <% if (currentPage < totalPages) { %>
+          <a href="/books/read/<%= book._id %>?page=<%= currentPage + 1 %>" class="btn btn-primary">Next Page</a>
+        <% } %>
+      </div>
+      
+      <a href="/books" class="btn btn-secondary close-btn">Close</a>
+    </div>
+  </div>
+  
+  <div class="reader-content">
+    <div class="page-image">
+      <img src="<%= page.imageUrl %>" alt="Page <%= currentPage %>" class="img-fluid">
+    </div>
+    
+    <div class="page-text">
+      <%- textWithSpans %>
+    </div>
+  </div>
+  
+  <div id="word-popup" class="word-popup" style="display: none;">
+    <div class="word-popup-content">
+      <div class="word-actions">
+        <button id="translate-btn" class="btn btn-sm btn-primary">See Translation</button>
+        <button id="add-to-bank-btn" class="btn btn-sm btn-secondary">Add to Word Bank</button>
+        <button id="close-popup-btn" class="btn btn-sm btn-light">Close</button>
+      </div>
+      <div id="translation" class="translation" style="display: none;"></div>
+    </div>
+  </div>
+  
+  <div id="add-word-form" class="add-word-form" style="display: none;">
+    <div class="form-content">
+      <h3>Add to Word Bank</h3>
+      <form id="wordBankForm">
+        <div class="form-group">
+          <label for="word">Word</label>
+          <input type="text" id="word" name="word" class="form-control" readonly>
+        </div>
+        
+        <div class="form-group">
+          <label for="translation">Translation</label>
+          <input type="text" id="word-translation" name="translation" class="form-control" required>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Add Word</button>
+          <button type="button" id="cancel-add-word" class="btn btn-secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const selectableWords = document.querySelectorAll('.selectable-word');
+    const wordPopup = document.getElementById('word-popup');
+    const translateBtn = document.getElementById('translate-btn');
+    const addToBankBtn = document.getElementById('add-to-bank-btn');
+    const closePopupBtn = document.getElementById('close-popup-btn');
+    const translation = document.getElementById('translation');
+    const addWordForm = document.getElementById('add-word-form');
+    const wordInput = document.getElementById('word');
+    const wordTranslationInput = document.getElementById('word-translation');
+    const wordBankForm = document.getElementById('wordBankForm');
+    const cancelAddWord = document.getElementById('cancel-add-word');
+    
+    let selectedWord = '';
+    let selectedElement = null;
+    
+    // Word selection
+    selectableWords.forEach(word => {
+      word.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // Reset previous selection
+        if (selectedElement) {
+          selectedElement.classList.remove('selected');
+        }
+        
+        // Set new selection
+        selectedWord = this.textContent.replace(/[^\w\s]/g, ''); // Remove punctuation
+        selectedElement = this;
+        this.classList.add('selected');
+        
+        // Position and show popup
+        const rect = this.getBoundingClientRect();
+        wordPopup.style.left = `${rect.left}px`;
+        wordPopup.style.top = `${rect.bottom + window.scrollY + 5}px`;
+        wordPopup.style.display = 'block';
+        
+        // Hide translation if it was showing
+        translation.style.display = 'none';
+      });
+    });
+    
+    // Close popup when clicking elsewhere
+    document.addEventListener('click', function(e) {
+      if (!wordPopup.contains(e.target) && !addWordForm.contains(e.target) && 
+          !e.target.classList.contains('selectable-word')) {
+        wordPopup.style.display = 'none';
+        addWordForm.style.display = 'none';
+        
+        if (selectedElement) {
+          selectedElement.classList.remove('selected');
+          selectedElement = null;
+        }
+      }
+    });
+    
+    // Translation button
+    translateBtn.addEventListener('click', async function() {
+      try {
+        translation.textContent = 'Translating...';
+        translation.style.display = 'block';
+        
+        const response = await fetch('/api/translate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            text: selectedWord,
+            targetLang: 'es' // Default to Spanish, could be user-configurable
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          translation.textContent = `Translation: ${data.translation}`;
+          wordTranslationInput.value = data.translation;
+        } else {
+          translation.textContent = 'Translation failed';
+        }
+      } catch (error) {
+        translation.textContent = 'Translation failed';
+        console.error('Translation error:', error);
+      }
+    });
+    
+    // Add to bank button
+    addToBankBtn.addEventListener('click', function() {
+      wordPopup.style.display = 'none';
+      
+      // Position form near the selected word
+      const rect = selectedElement.getBoundingClientRect();
+      addWordForm.style.left = `${rect.left}px`;
+      addWordForm.style.top = `${rect.bottom + window.scrollY + 5}px`;
+      
+      // Set the word in the form
+      wordInput.value = selectedWord;
+      
+      // Show the form
+      addWordForm.style.display = 'block';
+    });
+    
+    // Close popup button
+    closePopupBtn.addEventListener('click', function() {
+      wordPopup.style.display = 'none';
+      
+      if (selectedElement) {
+        selectedElement.classList.remove('selected');
+        selectedElement = null;
+      }
+    });
+    
+    // Word bank form submission
+    wordBankForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      try {
+        const response = await fetch('/api/word-bank', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            word: wordInput.value,
+            translation: wordTranslationInput.value,
+            bookId: '<%= book._id %>'
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          alert('Word added to bank');
+          addWordForm.style.display = 'none';
+          
+          if (selectedElement) {
+            selectedElement.classList.remove('selected');
+            selectedElement = null;
+          }
+        } else {
+          alert('Failed to add word');
+        }
+      } catch (error) {
+        alert('Failed to add word');
+        console.error('Add word error:', error);
+      }
+    });
+    
+    // Cancel add word button
+    cancelAddWord.addEventListener('click', function() {
+      addWordForm.style.display = 'none';
+      
+      if (selectedElement) {
+        selectedElement.classList.remove('selected');
+        selectedElement = null;
+      }
+    });
+  });
+</script>
+
+<%- include('../partials/footer') %>

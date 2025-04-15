@@ -1,7 +1,9 @@
 <%- include('../partials/header') %>
 
-<div class="dashboard-container">
+<div class="container">
   <h1>Admin Dashboard</h1>
+  
+  <%- include('../partials/messages') %>
   
   <div class="admin-actions">
     <a href="/admin/users" class="btn btn-primary">View Users Progress</a>
@@ -11,12 +13,15 @@
   <div class="admin-stats">
     <div class="stat-card">
       <h3>Total Users</h3>
-      <p>0 users registered</p>
+      <p class="stat-number"><%= userCount %></p>
+      <p>users registered</p>
     </div>
     
     <div class="stat-card">
-      <h3>Total Books</h3>
-      <p>0 books available</p>
+      <h3>Books</h3>
+      <p class="stat-number"><%= bookCount %></p>
+      <p>books in the database</p>
+      <p><span class="badge badge-success"><%= activeBookCount %></span> active books</p>
     </div>
   </div>
 </div>

@@ -1,28 +1,78 @@
 <%- include('../partials/header') %>
 
-<div class="dashboard-container">
+<div class="container">
   <h1>Welcome, <%= user.username %></h1>
+  
+  <%- include('../partials/messages') %>
   
   <div class="dashboard-stats">
     <div class="stat-card">
       <h3>Reading Progress</h3>
-      <p>You haven't started reading any books yet.</p>
+      <% if (currentBook) { %>
+        <div class="current-book">
+          <div class="book-info">
+            <h4><%= currentBook.title %></h4>
+            <div class="progress mb-2">
+              <div class="progress-bar" role="progressbar" style="width: <%= currentBook.percentComplete %>%;" aria-valuenow="<%= currentBook.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(currentBook.percentComplete) %>%</div>
+            </div>
+            <p>Page <%= currentBook.currentPage %> of <%= currentBook.totalPages %></p>
+            <a href="/books/read/<%= currentBook._id %>?page=<%= currentBook.currentPage %>" class="btn btn-primary">Continue Reading</a>
+          </div>
+        </div>
+      <% } else { %>
+        <p>You haven't started reading any books yet.</p>
+        <a href="/books" class="btn btn-primary">Browse Books</a>
+      <% } %>
     </div>
     
     <div class="stat-card">
       <h3>Word Bank</h3>
-      <p>You haven't added any words to your bank yet.</p>
+      <% if (wordCount > 0) { %>
+        <p>You have saved <strong><%= wordCount %></strong> words to your personal word bank.</p>
+        <a href="/word-bank" class="btn btn-primary">View Word Bank</a>
+      <% } else { %>
+        <p>You haven't added any words to your bank yet.</p>
+        <p>Start reading and click on words to add them to your bank!</p>
+      <% } %>
     </div>
   </div>
   
   <div class="dashboard-actions">
-    <a href="/books" class="btn btn-primary">Browse Books</a>
+    <a href="/books" class="btn btn-primary">Browse All Books</a>
     <a href="/word-bank" class="btn btn-secondary">My Word Bank</a>
   </div>
   
   <div class="book-list-section">
     <h2>Available Books</h2>
-    <p>No books available yet. Check back soon!</p>
+    <% if (books && books.length > 0) { %>
+      <div class="row">
+        <% books.forEach(book => { %>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="<%= book.coverImage %>" class="card-img-top" alt="<%= book.title %>">
+              <div class="card-body">
+                <h5 class="card-title"><%= book.title %></h5>
+                <p class="card-text"><%= book.description.length > 100 ? book.description.substring(0, 100) + '...' : book.description %></p>
+                
+                <% if (book.percentComplete > 0) { %>
+                  <div class="progress mb-3">
+                    <div class="progress-bar" role="progressbar" style="width: <%= book.percentComplete %>%;" aria-valuenow="<%= book.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(book.percentComplete) %>%</div>
+                  </div>
+                  <a href="/books/read/<%= book._id %>?page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
+                <% } else { %>
+                  <a href="/books/read/<%= book._id %>" class="btn btn-primary btn-block">Start Reading</a>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+      <div class="text-center mt-4">
+        <a href="/books" class="btn btn-outline-primary">View All Books</a>
+      </div>
+    <% } else { %>
+      <p>No books available yet. Check back soon!</p>
+    <% } %>
   </div>
 </div>
 
