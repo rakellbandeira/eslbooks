@@ -1,9 +1,3 @@
-// This stores words saved by users
-// Each entry has a reference to the user and optionally to the book where the word was found
-// using a compound index to ensure each user can only save a unique word once
-// storing the word in lowercase to make searches case-insensitive
-// TRY: The context field can optionally store the sentence or context in which the word appeared
-
 const mongoose = require('mongoose');
 
 const WordBankSchema = new mongoose.Schema({
@@ -27,9 +21,8 @@ const WordBankSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  bookId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Book'
+  bookFilename: {
+    type: String
   },
   createdAt: {
     type: Date,

@@ -10,10 +10,10 @@ const PageSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  imageUrl: {
+  /* imageUrl: {
     type: String,
     required: true
-  },
+  }, */
   text: {
     type: String,
     required: true

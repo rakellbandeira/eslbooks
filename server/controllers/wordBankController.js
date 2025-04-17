@@ -1,5 +1,5 @@
 const WordBank = require('../models/WordBank');
-const Book = require('../models/Book');
+const { loadAllBooks } = require('../utils/bookLoader');
 const { groupWordsAlphabetically } = require('../utils/index');
 
 // Get user's word bank
@@ -16,16 +16,30 @@ exports.getWordBank = async (req, res, next) => {
     }
     
     // Get words
-    const words = await WordBank.find(query)
-      .sort({ word: 1 })
-      .populate('bookId', 'title');
+    const words = await WordBank.find(query).sort({ word: 1 });
+    
+    // Load all books to get titles
+    const books = await loadAllBooks();
+    const bookMap = {};
+    books.forEach(book => {
+      bookMap[book.filename] = book.title;
+    });
+    
+    // Enhance words with book titles
+    const enhancedWords = words.map(word => {
+      const wordObj = word.toObject();
+      if (word.bookFilename && bookMap[word.bookFilename]) {
+        wordObj.bookTitle = bookMap[word.bookFilename];
+      }
+      return wordObj;
+    });
     
     // Group words alphabetically
-    const groupedWords = groupWordsAlphabetically(words);
+    const groupedWords = groupWordsAlphabetically(enhancedWords);
     
     res.render('dashboard/word-bank', {
       title: 'My Word Bank',
-      words,
+      words: enhancedWords,
       groupedWords,
       search,
       user: req.user
@@ -34,8 +48,6 @@ exports.getWordBank = async (req, res, next) => {
     next(error);
   }
 };
-
-// Add word to word bank (via API, already implemented in apiRoutes.js)
 
 // Edit word in word bank
 exports.editWord = async (req, res, next) => {

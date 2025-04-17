@@ -5,7 +5,7 @@
   
   <%- include('../partials/messages') %>
   
-  <form action="/admin/books/add" method="POST" enctype="multipart/form-data">
+  <form action="/admin/book/add" method="POST" enctype="multipart/form-data">
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text" id="title" name="title" class="form-control" required>
@@ -34,7 +34,7 @@
     
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Add Book</button>
-      <a href="/admin/books" class="btn btn-secondary">Cancel</a>
+      <a href="/admin/book" class="btn btn-secondary">Cancel</a>
     </div>
   </form>
 </div>

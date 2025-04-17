@@ -1,14 +1,12 @@
-const Book = require('../models/Book');
-const Page = require('../models/Page');
+const { loadAllBooks, loadBookByFilename } = require('../utils/bookLoader');
 const UserProgress = require('../models/UserProgress');
-const { uploadToB2, deleteFromB2 } = require('../config/b2');
 
-// Get all books (admin view)
+// Get all books for admin
 exports.getAllBooks = async (req, res, next) => {
   try {
-    const books = await Book.find().sort({ createdAt: -1 });
+    const books = await loadAllBooks();
     
-    res.render('admin/books', {
+    res.render('admin/book', {
       title: 'Manage Books',
       books,
       user: req.user
@@ -18,313 +16,33 @@ exports.getAllBooks = async (req, res, next) => {
   }
 };
 
-// Get add book form
-exports.getAddBookForm = (req, res) => {
-  res.render('admin/add-book', {
-    title: 'Add New Book',
-    user: req.user
-  });
-};
-
-// Add new book
-exports.addBook = async (req, res, next) => {
-  try {
-    const { title, description, level } = req.body;
-    
-    // Validate input
-    if (!title || !description || !level) {
-      req.flash('error', 'Please fill in all fields');
-      return res.redirect('/admin/books/add');
-    }
-    
-    // Check if cover image exists
-    if (!req.file) {
-      req.flash('error', 'Cover image is required');
-      return res.redirect('/admin/books/add');
-    }
-    
-    // Upload cover image to B2
-    const coverImageUrl = await uploadToB2(req.file, 'covers');
-    
-    // Create new book
-    const book = new Book({
-      title,
-      description,
-      coverImage: coverImageUrl,
-      level
-    });
-    
-    await book.save();
-    
-    req.flash('success', 'Book added successfully');
-    res.redirect('/admin/books');
-  } catch (error) {
-    next(error);
-  }
-};
-
-// Get edit book form
-exports.getEditBookForm = async (req, res, next) => {
-  try {
-    const book = await Book.findById(req.params.id);
-    
-    if (!book) {
-      req.flash('error', 'Book not found');
-      return res.redirect('/admin/books');
-    }
-    
-    // Get pages for this book
-    const pages = await Page.find({ bookId: book._id }).sort({ pageNumber: 1 });
-    
-    res.render('admin/edit-book', {
-      title: `Edit ${book.title}`,
-      book,
-      pages,
-      user: req.user
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-// Update book
-exports.updateBook = async (req, res, next) => {
-  try {
-    const { title, description, level, isActive } = req.body;
-    
-    // Find book
-    const book = await Book.findById(req.params.id);
-    
-    if (!book) {
-      req.flash('error', 'Book not found');
-      return res.redirect('/admin/books');
-    }
-    
-    // Update book details
-    book.title = title;
-    book.description = description;
-    book.level = level;
-    book.isActive = isActive === 'on' || isActive === true;
-    
-    // Upload new cover image if provided
-    if (req.file) {
-      // Delete old cover image if it exists
-      if (book.coverImage) {
-        try {
-          await deleteFromB2(book.coverImage);
-        } catch (err) {
-          console.error('Error deleting old cover image:', err);
-        }
-      }
-      
-      // Upload new cover image
-      book.coverImage = await uploadToB2(req.file, 'covers');
-    }
-    
-    await book.save();
-    
-    req.flash('success', 'Book updated successfully');
-    res.redirect('/admin/books');
-  } catch (error) {
-    next(error);
-  }
-};
-
-// Delete book
-exports.deleteBook = async (req, res, next) => {
-  try {
-    const book = await Book.findById(req.params.id);
-    
-    if (!book) {
-      req.flash('error', 'Book not found');
-      return res.redirect('/admin/books');
-    }
-    
-    // Delete associated pages
-    const pages = await Page.find({ bookId: book._id });
-    
-    // Delete page images from B2
-    for (const page of pages) {
-      try {
-        await deleteFromB2(page.imageUrl);
-      } catch (err) {
-        console.error(`Error deleting page image for page ${page.pageNumber}:`, err);
-      }
-    }
-    
-    // Delete the pages from the database
-    await Page.deleteMany({ bookId: book._id });
-    
-    // Delete the book cover from B2
-    try {
-      await deleteFromB2(book.coverImage);
-    } catch (err) {
-      console.error('Error deleting book cover:', err);
-    }
-    
-    // Delete user progress related to this book
-    await UserProgress.deleteMany({ bookId: book._id });
-    
-    // Delete the book
-    await Book.findByIdAndDelete(req.params.id);
-    
-    req.flash('success', 'Book deleted successfully');
-    res.redirect('/admin/books');
-  } catch (error) {
-    next(error);
-  }
-};
-
-// Add page to book
-exports.addPage = async (req, res, next) => {
-  try {
-    const { bookId, text } = req.body;
-    
-    // Validate input
-    if (!bookId || !text) {
-      req.flash('error', 'Please fill in all fields');
-      return res.redirect(`/admin/books/edit/${bookId}`);
-    }
-    
-    // Check if book exists
-    const book = await Book.findById(bookId);
-    if (!book) {
-      req.flash('error', 'Book not found');
-      return res.redirect('/admin/books');
-    }
-    
-    // Check if page image exists
-    if (!req.file) {
-      req.flash('error', 'Page image is required');
-      return res.redirect(`/admin/books/edit/${bookId}`);
-    }
-    
-    // Get current highest page number
-    const highestPage = await Page.findOne({ bookId })
-      .sort({ pageNumber: -1 })
-      .limit(1);
-    
-    const pageNumber = highestPage ? highestPage.pageNumber + 1 : 1;
-    
-    // Upload page image to B2
-    const imageUrl = await uploadToB2(req.file, `pages/${bookId}`);
-    
-    // Create new page
-    const page = new Page({
-      bookId,
-      pageNumber,
-      imageUrl,
-      text
-    });
-    
-    await page.save();
-    
-    // Update user progress for all users reading this book
-    const userProgress = await UserProgress.find({ bookId });
-    
-    if (userProgress.length > 0) {
-      for (const progress of userProgress) {
-        progress.totalPages = pageNumber;
-        progress.percentComplete = (progress.currentPage / pageNumber) * 100;
-        await progress.save();
-      }
-    }
-    
-    req.flash('success', 'Page added successfully');
-    res.redirect(`/admin/books/edit/${bookId}`);
-  } catch (error) {
-    next(error);
-  }
-};
-
-// Delete page
-exports.deletePage = async (req, res, next) => {
-  try {
-    const { id, bookId } = req.params;
-    
-    // Find the page
-    const page = await Page.findOne({ _id: id, bookId });
-    
-    if (!page) {
-      req.flash('error', 'Page not found');
-      return res.redirect(`/admin/books/edit/${bookId}`);
-    }
-    
-    // Delete page image from B2
-    try {
-      await deleteFromB2(page.imageUrl);
-    } catch (err) {
-      console.error('Error deleting page image:', err);
-    }
-    
-    // Delete the page
-    await Page.findByIdAndDelete(id);
-    
-    // Reorder page numbers
-    const pages = await Page.find({ bookId }).sort({ pageNumber: 1 });
-    
-    for (let i = 0; i < pages.length; i++) {
-      pages[i].pageNumber = i + 1;
-      await pages[i].save();
-    }
-    
-    // Update user progress for all users reading this book
-    const userProgress = await UserProgress.find({ bookId });
-    
-    if (userProgress.length > 0) {
-      for (const progress of userProgress) {
-        if (progress.currentPage > pages.length) {
-          progress.currentPage = pages.length;
-        }
-        
-        progress.totalPages = pages.length;
-        progress.percentComplete = pages.length > 0 
-          ? (progress.currentPage / pages.length) * 100
-          : 0;
-        
-        await progress.save();
-      }
-    }
-    
-    req.flash('success', 'Page deleted successfully');
-    res.redirect(`/admin/books/edit/${bookId}`);
-  } catch (error) {
-    next(error);
-  }
-};
-
 // Get books for client dashboard
 exports.getBooksForClient = async (req, res, next) => {
   try {
-    // Get active books
-    const books = await Book.find({ isActive: true });
+    // Get all books
+    const books = await loadAllBooks();
     
-    // Get user progress for these books
-    const userProgress = await UserProgress.find({ 
-      userId: req.user._id 
-    });
+    // Get user's reading progress
+    const userProgress = await UserProgress.find({ userId: req.user._id });
     
     // Map progress to books
-    const booksWithProgress = await Promise.all(books.map(async (book) => {
-      const progress = userProgress.find(p => 
-        p.bookId.toString() === book._id.toString()
-      );
-      
-      // Count pages for this book
-      const pageCount = await Page.countDocuments({ bookId: book._id });
+    const booksWithProgress = books.map(book => {
+      const progress = userProgress.find(p => p.bookFilename === book.filename);
       
       return {
-        _id: book._id,
         title: book.title,
         description: book.description,
-        coverImage: book.coverImage,
         level: book.level,
-        pageCount,
+        filename: book.filename,
+        coverImage: `/assets/covers/${book.filename.replace('.json', '.jpg')}`,
+        episodeCount: book.episodeQuantity,
+        currentEpisode: progress ? progress.currentEpisode : 1,
         currentPage: progress ? progress.currentPage : 1,
+        totalPages: calculateTotalPages(book),
         percentComplete: progress ? progress.percentComplete : 0,
         lastRead: progress ? progress.lastRead : null
       };
-    }));
+    });
     
     res.render('dashboard/books', {
       title: 'Browse Books',
@@ -335,3 +53,99 @@ exports.getBooksForClient = async (req, res, next) => {
     next(error);
   }
 };
+
+// Helper function to calculate total pages in a book
+function calculateTotalPages(book) {
+  let totalPages = 0;
+  
+  // Loop through each episode
+  for (const episodeKey in book.episodeContents[0]) {
+    const episode = book.episodeContents[0][episodeKey];
+    // Add the number of pages in this episode
+    totalPages += Object.keys(episode[0]).length;
+  }
+  
+  return totalPages;
+}
+
+// Helper function to get a specific page from a book
+function getBookPage(book, episodeNumber, pageNumber) {
+  try {
+    const episodeKey = `episode${episodeNumber}`;
+    const pageKey = `page${pageNumber}`;
+    
+    // Get the episode
+    const episode = book.episodeContents[0][episodeKey];
+    if (!episode) {
+      return null;
+    }
+    
+    // Get the page
+    const page = episode[0][pageKey];
+    if (!page) {
+      return null;
+    }
+    
+    return {
+      content: page[0],
+      episodeTitle: book.episodeTitles[0][episodeKey],
+      pageNumber,
+      episodeNumber
+    };
+  } catch (error) {
+    console.error('Error getting book page:', error);
+    return null;
+  }
+}
+
+// Get next page information
+function getNextPageInfo(book, currentEpisode, currentPage) {
+  const episodeKey = `episode${currentEpisode}`;
+  const nextPageKey = `page${currentPage + 1}`;
+  
+  // Check if there's a next page in the current episode
+  if (book.episodeContents[0][episodeKey][0][nextPageKey]) {
+    return {
+      episodeNumber: currentEpisode,
+      pageNumber: currentPage + 1
+    };
+  }
+  
+  // Check if there's a next episode
+  const nextEpisodeKey = `episode${currentEpisode + 1}`;
+  if (book.episodeContents[0][nextEpisodeKey]) {
+    return {
+      episodeNumber: currentEpisode + 1,
+      pageNumber: 1
+    };
+  }
+  
+  // No next page or episode
+  return null;
+}
+
+// Get previous page information
+function getPrevPageInfo(book, currentEpisode, currentPage) {
+  // If we're on the first page of the first episode, there's no previous page
+  if (currentEpisode === 1 && currentPage === 1) {
+    return null;
+  }
+  
+  // If we're on the first page of an episode (but not the first episode)
+  if (currentPage === 1) {
+    const prevEpisodeKey = `episode${currentEpisode - 1}`;
+    const prevEpisode = book.episodeContents[0][prevEpisodeKey][0];
+    const prevEpisodePages = Object.keys(prevEpisode).length;
+    
+    return {
+      episodeNumber: currentEpisode - 1,
+      pageNumber: prevEpisodePages
+    };
+  }
+  
+  // Otherwise, just go to the previous page in the current episode
+  return {
+    episodeNumber: currentEpisode,
+    pageNumber: currentPage - 1
+  };
+}

@@ -2,29 +2,30 @@
 
 <div class="reader-container">
   <div class="reader-header">
-    <h1><%= book.title %></h1>
+    <div class="book-info">
+      <h1><%= book.title %></h1>
+      <h2>Episode <%= currentEpisode %>: <%= book.episodeTitle %></h2>
+    </div>
     <div class="reader-controls">
       <div class="page-navigation">
-        <% if (currentPage > 1) { %>
-          <a href="/books/read/<%= book._id %>?page=<%= currentPage - 1 %>" class="btn btn-primary">Previous Page</a>
+        <% if (prevPage) { %>
+          <a href="/book/read/<%= book.filename %>?episode=<%= prevPage.episodeNumber %>&page=<%= prevPage.pageNumber %>" class="btn btn-primary">Previous Page</a>
         <% } %>
         
-        <span class="page-info">Page <%= currentPage %> of <%= totalPages %></span>
+        <span class="page-info">Page <%= currentPage %> of <%= totalPagesInEpisode %> (Episode <%= currentEpisode %>)</span>
         
-        <% if (currentPage < totalPages) { %>
-          <a href="/books/read/<%= book._id %>?page=<%= currentPage + 1 %>" class="btn btn-primary">Next Page</a>
+        <% if (nextPage) { %>
+          <a href="/book/read/<%= book.filename %>?episode=<%= nextPage.episodeNumber %>&page=<%= nextPage.pageNumber %>" class="btn btn-primary">Next Page</a>
         <% } %>
       </div>
       
-      <a href="/books" class="btn btn-secondary close-btn">Close</a>
+      <a href="/book" class="btn btn-secondary close-btn">Close</a>
     </div>
   </div>
   
-  <div class="reader-content">
-    <div class="page-image">
-      <img src="<%= page.imageUrl %>" alt="Page <%= currentPage %>" class="img-fluid">
-    </div>
-    
+  
+  
+  <div class="reader-content" data-background="<%= backgroundImagePath %>">
     <div class="page-text">
       <%- textWithSpans %>
     </div>
@@ -191,7 +192,7 @@
           body: JSON.stringify({
             word: wordInput.value,
             translation: wordTranslationInput.value,
-            bookId: '<%= book._id %>'
+            bookFilename: '<%= book.filename %>'
           })
         });
         
@@ -223,6 +224,20 @@
         selectedElement = null;
       }
     });
+
+
+    // Set progress bar widths
+  document.querySelectorAll('.progress-bar').forEach(bar => {
+    const value = bar.getAttribute('aria-valuenow');
+    bar.style.width = value + '%';
+  });
+  
+  // Set background images
+  document.querySelectorAll('.reader-content').forEach(content => {
+    const bgPath = content.getAttribute('data-background');
+    content.style.backgroundImage = `url('${bgPath}')`;
+  });
+
   });
 </script>
 

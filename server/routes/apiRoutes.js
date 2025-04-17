@@ -34,7 +34,7 @@ router.post('/api/translate', authenticate, async (req, res) => {
 // Add word to word bank
 router.post('/api/word-bank', authenticate, async (req, res) => {
   try {
-    const { word, translation, bookId } = req.body;
+    const { word, translation, bookFilename } = req.body;
     
     if (!word || !translation) {
       return res.status(400).json({
@@ -50,22 +50,22 @@ router.post('/api/word-bank', authenticate, async (req, res) => {
         userId: req.user._id,
         word: word.toLowerCase(),
         translation,
-        bookId
+        bookFilename
       },
       { upsert: true, new: true }
     );
     
     res.json({
-      success: true,
-      message: 'Word added to bank'
-    });
-  } catch (error) {
-    console.error('Add word error:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to add word'
-    });
-  }
-});
-
-module.exports = router;
+        success: true,
+        message: 'Word added to bank'
+      });
+    } catch (error) {
+      console.error('Add word error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to add word'
+      });
+    }
+  });
+  
+  module.exports = router;

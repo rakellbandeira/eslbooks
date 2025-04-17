@@ -1,5 +1,5 @@
 // Import the B2 class properly
-const { B2 } = require('backblaze-b2');
+const  B2  = require('backblaze-b2');
 
 // Initialize B2
 const b2 = new B2({

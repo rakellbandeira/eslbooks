@@ -423,10 +423,19 @@
   }
   
   .reader-content {
+    /* background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; */
+
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    background-image: url('/images/book-background.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
   }
   
   .page-image {
@@ -440,10 +449,19 @@
   }
   
   .page-text {
-    padding: 20px;
+   /*  padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px; */
+
+    padding: 40px;
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 40px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px;
   }
   
   .selectable-word {

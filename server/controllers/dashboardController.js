@@ -1,27 +1,37 @@
-const Book = require('../models/Book');
+const User = require('../models/User');
 const UserProgress = require('../models/UserProgress');
 const WordBank = require('../models/WordBank');
-const Page = require('../models/Page');
-const User = require('../models/User');
+const { loadAllBooks } = require('../utils/bookLoader');
 
 // Client dashboard
 exports.getClientDashboard = async (req, res, next) => {
   try {
     // Get user's reading progress
-    const userProgress = await UserProgress.find({ userId: req.user._id })
-      .populate('bookId')
-      .sort({ lastRead: -1 })
-      .limit(1);
+    const userProgress = await UserProgress.find({ 
+      userId: req.user._id 
+    }).sort({ lastRead: -1 }).limit(1);
     
     // Get user's word bank count
     const wordCount = await WordBank.countDocuments({ userId: req.user._id });
     
+    // Load all books
+    const allBooks = await loadAllBooks();
+    const bookMap = {};
+    allBooks.forEach(book => {
+      bookMap[book.filename] = book;
+    });
+    
     // Get current book if any
     let currentBook = null;
     
-    if (userProgress.length > 0) {
+    if (userProgress.length > 0 && bookMap[userProgress[0].bookFilename]) {
+      const bookData = bookMap[userProgress[0].bookFilename];
       currentBook = {
-        ...userProgress[0].bookId._doc,
+        title: bookData.title,
+        description: bookData.description,
+        filename: userProgress[0].bookFilename,
+        coverImage: `/assets/covers/${userProgress[0].bookFilename.replace('.json', '.jpg')}`,
+        currentEpisode: userProgress[0].currentEpisode,
         currentPage: userProgress[0].currentPage,
         totalPages: userProgress[0].totalPages,
         percentComplete: userProgress[0].percentComplete,
@@ -29,32 +39,28 @@ exports.getClientDashboard = async (req, res, next) => {
       };
     }
     
-    // Get some books for the dashboard
-    const books = await Book.find({ isActive: true })
-      .limit(3);
-    
-    // Map books to include page count
-    const booksWithPages = await Promise.all(books.map(async (book) => {
-      const pageCount = await Page.countDocuments({ bookId: book._id });
-      
-      // Check if user has progress for this book
-      const progress = await UserProgress.findOne({ 
-        userId: req.user._id,
-        bookId: book._id
-      });
+    // Get some books for the dashboard (limit to 3)
+    const books = allBooks.slice(0, 3).map(book => {
+      // Find progress for this book
+      const progress = userProgress.find(p => p.bookFilename === book.filename);
       
       return {
-        ...book._doc,
-        pageCount,
+        title: book.title,
+        description: book.description,
+        level: book.level,
+        filename: book.filename,
+        coverImage: `/assets/covers/${book.filename.replace('.json', '.jpg')}`,
+        episodeCount: book.episodeQuantity,
+        currentEpisode: progress ? progress.currentEpisode : 1,
         currentPage: progress ? progress.currentPage : 1,
         percentComplete: progress ? progress.percentComplete : 0
       };
-    }));
+    });
     
     res.render('dashboard/index', {
       title: 'Dashboard',
       currentBook,
-      books: booksWithPages,
+      books,
       wordCount,
       user: req.user
     });
@@ -70,16 +76,17 @@ exports.getAdminDashboard = async (req, res, next) => {
     const userCount = await User.countDocuments({ role: 'client' });
     
     // Get total books count
-    const bookCount = await Book.countDocuments();
-    
-    // Get active books count
-    const activeBookCount = await Book.countDocuments({ isActive: true });
+    const books = await loadAllBooks();
+    const bookCount = books.length;
+
+    const activeBookCount = bookCount;
+
     
     res.render('admin/dashboard', {
       title: 'Admin Dashboard',
       userCount,
       bookCount,
-      activeBookCount,
+      activeBookCount ,
       user: req.user
     });
   } catch (error) {

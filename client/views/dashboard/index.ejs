@@ -13,15 +13,14 @@
           <div class="book-info">
             <h4><%= currentBook.title %></h4>
             <div class="progress mb-2">
-              <div class="progress-bar" role="progressbar" style="width: <%= currentBook.percentComplete %>%;" aria-valuenow="<%= currentBook.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(currentBook.percentComplete) %>%</div>
+              <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="<%= currentBook.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(currentBook.percentComplete) %>%</div>
             </div>
             <p>Page <%= currentBook.currentPage %> of <%= currentBook.totalPages %></p>
-            <a href="/books/read/<%= currentBook._id %>?page=<%= currentBook.currentPage %>" class="btn btn-primary">Continue Reading</a>
-          </div>
+            <a href="/book/read/<%= currentBook.filename %>?episode=<%= currentBook.currentEpisode %>&page=<%= currentBook.currentPage %>" class="btn btn-primary">Continue Reading</a>          </div>
         </div>
       <% } else { %>
         <p>You haven't started reading any books yet.</p>
-        <a href="/books" class="btn btn-primary">Browse Books</a>
+        <a href="/book" class="btn btn-primary">Browse Books</a>
       <% } %>
     </div>
     
@@ -38,7 +37,7 @@
   </div>
   
   <div class="dashboard-actions">
-    <a href="/books" class="btn btn-primary">Browse All Books</a>
+    <a href="/book" class="btn btn-primary">Browse All Books</a>
     <a href="/word-bank" class="btn btn-secondary">My Word Bank</a>
   </div>
   
@@ -55,13 +54,13 @@
                 <p class="card-text"><%= book.description.length > 100 ? book.description.substring(0, 100) + '...' : book.description %></p>
                 
                 <% if (book.percentComplete > 0) { %>
+                   
                   <div class="progress mb-3">
-                    <div class="progress-bar" role="progressbar" style="width: <%= book.percentComplete %>%;" aria-valuenow="<%= book.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(book.percentComplete) %>%</div>
+                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="<%= book.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(book.percentComplete) %>%</div>
                   </div>
-                  <a href="/books/read/<%= book._id %>?page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
+                  <a href="/book/read/<%= book._id %>?page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
                 <% } else { %>
-                  <a href="/books/read/<%= book._id %>" class="btn btn-primary btn-block">Start Reading</a>
-                <% } %>
+                    <a href="/book/read/<%= book.filename %>?episode=1&page=1" class="btn btn-primary btn-block">Start Reading</a>                <% } %>
               </div>
             </div>
           </div>
