@@ -18,8 +18,9 @@
           <a href="/book/read/<%= book.filename %>?episode=<%= nextPage.episodeNumber %>&page=<%= nextPage.pageNumber %>" class="btn btn-primary">Next Page</a>
         <% } %>
       </div>
-      
-      <a href="/book" class="btn btn-secondary close-btn">Close</a>
+
+      <!-- Changed path here from /book to /dashboard -->
+      <a href="/dashboard" class="btn btn-secondary close-btn">Close</a>
     </div>
   </div>
   
@@ -135,7 +136,7 @@
           },
           body: JSON.stringify({
             text: selectedWord,
-            targetLang: 'es' // Default to Spanish, could be user-configurable
+            targetLang: 'pt' // Default to Spanish, could be user-configurable
           })
         });
         

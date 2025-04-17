@@ -58,8 +58,9 @@
                   <div class="progress mb-3">
                     <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="<%= book.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(book.percentComplete) %>%</div>
                   </div>
-                  <a href="/book/read/<%= book._id %>?page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
-                <% } else { %>
+                  <a href="/book/read/<%= book.filename %>?episode=<%= book.currentEpisode %>&page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
+                
+                  <% } else { %>
                     <a href="/book/read/<%= book.filename %>?episode=1&page=1" class="btn btn-primary btn-block">Start Reading</a>                <% } %>
               </div>
             </div>

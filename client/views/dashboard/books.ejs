@@ -22,18 +22,18 @@
                 <p class="card-text"><strong>Level:</strong> <%= book.level %></p>
                 
                 <% if (book.percentComplete > 0) { %>
-                    <div class="progress-bar progress-value-<%= Math.round(percentComplete) %>" 
+                    <div class="progress-bar progress-value-<%= Math.round(book.percentComplete) %>" 
                         role="progressbar" 
-                        aria-valuenow="<%= percentComplete %>" 
-                        aria-valuemin="0" 
+                        aria-valuenow="<%= book.percentComplete %>" 
+                        aria-valuemin="0"
                         aria-valuemax="100">
                      <%= Math.round(percentComplete) %>% Complete
                    </div>
                   <p class="card-text"><small class="text-muted">Episode <%= book.currentEpisode %>, Page <%= book.currentPage %></small></p>
-                  <a href="/book/read/<%= book.filename %>?episode=<%= book.currentEpisode %>&page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
+                  <a href="/books/read/<%= book.filename %>?episode=<%= book.currentEpisode %>&page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
                 <% } else { %>
                   <p class="card-text"><small class="text-muted"><%= book.episodeCount %> episodes</small></p>
-                  <a href="/book/read/<%= book.filename %>?episode=1&page=1" class="btn btn-primary btn-block">Start Reading</a>
+                  <a href="/books/read/<%= book.filename %>?episode=1&page=1" class="btn btn-primary btn-block">Start Reading</a>
                 <% } %>
               </div>
             </div>
