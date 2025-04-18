@@ -30,10 +30,10 @@
                      <%= Math.round(book.percentComplete) %>% Complete
                    </div>
                   <p class="card-text"><small class="text-muted">Episode <%= book.currentEpisode %>, Page <%= book.currentPage %></small></p>
-                  <a href="/books/read/<%= book.filename %>?episode=<%= book.currentEpisode %>&page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
+                  <a href="/book/read/<%= book.filename %>?episode=<%= book.currentEpisode %>&page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
                 <% } else { %>
                   <p class="card-text"><small class="text-muted"><%= book.episodeCount %> episodes</small></p>
-                  <a href="/books/read/<%= book.filename %>?episode=1&page=1" class="btn btn-primary btn-block">Start Reading</a>
+                  <a href="/book/read/<%= book.filename %>?episode=1&page=1" class="btn btn-primary btn-block">Start Reading</a>
                 <% } %>
               </div>
             </div>
@@ -53,7 +53,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       // Set progress bar widths
       document.querySelectorAll('.progress-bar').forEach(bar => {
-        const value = bar.getAttribute('aria-valuenow');
+        const value = parseFloat(bar.getAttribute('aria-valuenow'));
         bar.style.width = value + '%';
       });
       

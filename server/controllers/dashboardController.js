@@ -9,7 +9,9 @@ exports.getClientDashboard = async (req, res, next) => {
     // Get user's reading progress
     const userProgress = await UserProgress.find({ 
       userId: req.user._id 
-    }).sort({ lastRead: -1 }).limit(1);
+    }).sort({ lastRead: -1 });
+
+    console.log("Dashboard - Latest progress:", JSON.stringify(userProgress, null, 2));
     
     // Get user's word bank count
     const wordCount = await WordBank.countDocuments({ userId: req.user._id });
@@ -21,6 +23,14 @@ exports.getClientDashboard = async (req, res, next) => {
       bookMap[book.filename] = book;
     });
     
+    
+     // Map progress by filename for easy lookup
+     const progressMap = {};
+     userProgress.forEach(progress => {
+       progressMap[progress.bookFilename] = progress;
+     });
+
+
     // Get current book if any
     let currentBook = null;
     
@@ -39,11 +49,16 @@ exports.getClientDashboard = async (req, res, next) => {
       };
     }
     
-    // Get some books for the dashboard (limit to 3)
-    const books = allBooks.slice(0, 3).map(book => {
-      // Find progress for this book
-      const progress = userProgress.find(p => p.bookFilename === book.filename);
-      
+     // Get some books for the dashboard (limit to 3)
+    /*  const progressMap = {};
+     userProgress.forEach(p => {
+       progressMap[p.bookFilename] = p;
+     }); */
+     
+     const books = allBooks.slice(0, 3).map(book => {
+       const progress = progressMap[book.filename];
+    
+
       return {
         title: book.title,
         description: book.description,
@@ -56,6 +71,13 @@ exports.getClientDashboard = async (req, res, next) => {
         percentComplete: progress ? progress.percentComplete : 0
       };
     });
+
+
+    console.log("Dashboard - Books display:", JSON.stringify(books.map(b => ({ 
+        title: b.title, 
+        percentComplete: b.percentComplete 
+      })), null, 2));
+
     
     res.render('dashboard/index', {
       title: 'Dashboard',
@@ -68,6 +90,8 @@ exports.getClientDashboard = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 // Admin dashboard
 exports.getAdminDashboard = async (req, res, next) => {

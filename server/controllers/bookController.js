@@ -24,10 +24,19 @@ exports.getBooksForClient = async (req, res, next) => {
     
     // Get user's reading progress
     const userProgress = await UserProgress.find({ userId: req.user._id });
-    
+    console.log("All user progress:", JSON.stringify(userProgress, null, 2));
+
+
+     // Create a map for easy lookup
+     const progressMap = {};
+     userProgress.forEach(progress => {
+       progressMap[progress.bookFilename] = progress;
+     });
+
+
     // Map progress to books
     const booksWithProgress = books.map(book => {
-      const progress = userProgress.find(p => p.bookFilename === book.filename);
+      const progress = progressMap[book.filename];
       
       return {
         title: book.title,
@@ -43,6 +52,15 @@ exports.getBooksForClient = async (req, res, next) => {
         lastRead: progress ? progress.lastRead : null
       };
     });
+
+
+    // Debug output to check what the heck's going on
+    console.log("Books with progress:", JSON.stringify(booksWithProgress.map(b => ({ 
+        filename: b.filename, 
+        title: b.title,
+        percentComplete: b.percentComplete 
+      })), null, 2));
+
     
     res.render('dashboard/books', {
       title: 'Browse Books',
@@ -53,6 +71,8 @@ exports.getBooksForClient = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 // Helper function to calculate total pages in a book
 function calculateTotalPages(book) {
