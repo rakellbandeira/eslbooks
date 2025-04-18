@@ -7,6 +7,9 @@ exports.getBookReader = async (req, res, next) => {
     const { filename } = req.params;
     const episodeNum = parseInt(req.query.episode) || 1;
     const pageNum = parseInt(req.query.page) || 1;
+
+    console.log('Reading book:', filename);
+    console.log('User ID:', req.user._id);
     
     // Load book data from JSON file
     const book = await loadBookByFilename(filename);
@@ -61,21 +64,39 @@ exports.getBookReader = async (req, res, next) => {
     const nextPage = getNextPageInfo(book, episodeNum, pageNum);
     const prevPage = getPrevPageInfo(book, episodeNum, pageNum);
     
+   // In server/controllers/readerController.js, in the getBookReader function:
+
     // Update user progress
-    await UserProgress.findOneAndUpdate(
-      { 
-        userId: req.user._id, 
-        bookFilename: filename 
-      },
-      {
-        currentEpisode: episodeNum,
-        currentPage: pageNum,
-        totalPages: totalPagesInBook,
-        percentComplete,
-        lastRead: new Date()
-      },
-      { upsert: true, new: true }
-    );
+    try {
+        const existingProgress = await UserProgress.findOne({ 
+            userId: req.user._id, 
+            bookFilename: filename 
+          });
+          console.log('Existing progress:', existingProgress);
+
+        await UserProgress.findOneAndUpdate(
+        { 
+            userId: req.user._id, 
+            bookFilename: filename 
+        },
+        {
+            currentEpisode: episodeNum,
+            currentPage: pageNum,
+            totalPages: totalPagesInBook,
+            percentComplete,
+            lastRead: new Date()
+        },
+        { 
+            upsert: true, 
+            new: true,
+            runValidators: true 
+        }
+        );
+    } catch (error) {
+        console.error('Progress update error:', error);
+        // Continue even if progress update fails
+        // This prevents the reading experience from being interrupted
+    }
     
     // Create text with spans for each paragraph
     const textWithSpans = Object.entries(pageContent)

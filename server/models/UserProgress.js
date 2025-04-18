@@ -10,6 +10,13 @@ const UserProgressSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // Explicitly set bookId to undefined so it doesn't get created
+  bookId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book',
+    required: false,
+    default: undefined
+  },
   currentEpisode: {
     type: Number,
     default: 1
@@ -32,8 +39,9 @@ const UserProgressSchema = new mongoose.Schema({
   }
 });
 
-// Compound index to ensure unique progress tracking per user and book
+// Create a compound index to ensure unique progress tracking per user and book
 UserProgressSchema.index({ userId: 1, bookFilename: 1 }, { unique: true });
+
 
 const UserProgress = mongoose.model('UserProgress', UserProgressSchema);
 

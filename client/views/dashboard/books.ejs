@@ -18,8 +18,8 @@
               <img src="<%= book.coverImage %>" class="card-img-top" alt="<%= book.title %>">
               <div class="card-body">
                 <h5 class="card-title"><%= book.title %></h5>
-                <p class="card-text"><%= book.description.length > 100 ? book.description.substring(0, 100) + '...' : book.description %></p>
-                <p class="card-text"><strong>Level:</strong> <%= book.level %></p>
+                <!-- <p class="card-text"><%= book.description.length > 100 ? book.description.substring(0, 100) + '...' : book.description %></p>
+                <p class="card-text"><strong>Level:</strong> <%= book.level %></p> -->
                 
                 <% if (book.percentComplete > 0) { %>
                     <div class="progress-bar progress-value-<%= Math.round(book.percentComplete) %>" 
@@ -27,7 +27,7 @@
                         aria-valuenow="<%= book.percentComplete %>" 
                         aria-valuemin="0"
                         aria-valuemax="100">
-                     <%= Math.round(percentComplete) %>% Complete
+                     <%= Math.round(book.percentComplete) %>% Complete
                    </div>
                   <p class="card-text"><small class="text-muted">Episode <%= book.currentEpisode %>, Page <%= book.currentPage %></small></p>
                   <a href="/books/read/<%= book.filename %>?episode=<%= book.currentEpisode %>&page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>

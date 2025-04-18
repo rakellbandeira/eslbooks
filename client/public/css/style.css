@@ -325,11 +325,27 @@
   }
   
   .card {
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     height: 100%;
+    width: 100%;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
+
+    position: relative;
+  }
+
+  .card img{
+    grid-column: 1/2;
+    grid-row: 1/4;
+    width: fit-content;
+    height: 100%;
+
+    
   }
   
   .card:hover {
@@ -340,21 +356,34 @@
   .card-img-top {
     height: 250px;
     object-fit: cover;
+    z-index: 0;
+    position: relative;
   }
   
   .card-body {
+    grid-column: 1/2;
+    grid-row: 3/4;
     padding: 20px;
+    z-index: 1;
+    position: relative;
+    width: 300px;
+    background-color: #3333337e;
+    
   }
   
   .card-title {
     margin-bottom: 10px;
     font-weight: 600;
+    font-size: 2rem;
+    color: white;
+    
   }
   
   .progress {
-    height: 10px;
+    height: fit-content;
     border-radius: 5px;
     background-color: #e9ecef;
+    margin: 20px auto;
   }
   
   .progress-bar {
@@ -385,6 +414,19 @@
   }
   
   /* Reader */
+  .row{
+    display: flex;
+    gap: 50px;
+    
+
+  }
+
+  .col-md-4 {
+    width: 300px;
+    height: 400px;
+  }
+
+
   .reader-container {
     max-width: 1000px;
     margin: 0 auto;

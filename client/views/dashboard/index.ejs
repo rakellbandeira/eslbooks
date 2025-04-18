@@ -13,7 +13,7 @@
           <div class="book-info">
             <h4><%= currentBook.title %></h4>
             <div class="progress mb-2">
-              <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="<%= currentBook.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(currentBook.percentComplete) %>%</div>
+              <div class="progress-bar" role="progressbar" style="width:<%= currentBook.percentComplete %>%" aria-valuenow="<%= currentBook.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(currentBook.percentComplete) %>%</div>
             </div>
             <p>Page <%= currentBook.currentPage %> of <%= currentBook.totalPages %></p>
             <a href="/book/read/<%= currentBook.filename %>?episode=<%= currentBook.currentEpisode %>&page=<%= currentBook.currentPage %>" class="btn btn-primary">Continue Reading</a>          </div>
@@ -51,12 +51,12 @@
               <img src="<%= book.coverImage %>" class="card-img-top" alt="<%= book.title %>">
               <div class="card-body">
                 <h5 class="card-title"><%= book.title %></h5>
-                <p class="card-text"><%= book.description.length > 100 ? book.description.substring(0, 100) + '...' : book.description %></p>
+                <!-- <p class="card-text"><%= book.description.length > 100 ? book.description.substring(0, 100) + '...' : book.description %></p> -->
                 
                 <% if (book.percentComplete > 0) { %>
                    
                   <div class="progress mb-3">
-                    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="<%= book.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(book.percentComplete) %>%</div>
+                    <div class="progress-bar" role="progressbar" style="width:<%= book.percentComplete %>%" aria-valuenow="<%= book.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(book.percentComplete) %>%</div>
                   </div>
                   <a href="/book/read/<%= book.filename %>?episode=<%= book.currentEpisode %>&page=<%= book.currentPage %>" class="btn btn-primary btn-block">Continue Reading</a>
                 
