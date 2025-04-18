@@ -519,27 +519,46 @@
   .selectable-word.selected {
     background-color: #cce5ff;
   }
-  
+/*   
   .word-popup {
-    position: absolute;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    position: fixed; 
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    min-width: 200px;
+    max-width: 300px;
+    transform: translateX(-50%); 
+    margin-left: 50%; 
+  }
+  
+  .word-popup-content {
+    padding: 10px;
+  }
+  
+  .translation {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
   }
   
   .word-actions {
     display: flex;
-    gap: 5px;
-    margin-bottom: 10px;
+    justify-content: space-between;
+    margin-top: 8px;
   }
   
-  .translation {
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
-    margin-top: 10px;
+  .selectable-word {
+    cursor: pointer;
+    padding: 0 1px;
+  }
+  
+  .selectable-word:hover {
+    background-color: rgba(255, 255, 0, 0.3);
+  }
+  
+  .selectable-word.selected {
+    background-color: rgba(255, 255, 0, 0.5);
   }
   
   .add-word-form {
@@ -560,7 +579,89 @@
   .close-btn {
     white-space: nowrap;
   }
+ */
 
+
+ /* Add these styles to your CSS file or in a style tag in the head section */
+
+.word-popup {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    min-width: 200px;
+    max-width: 300px;
+  }
+  
+  .word-popup-content {
+    padding: 10px;
+  }
+  
+  .translation {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .word-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  
+  .selectable-word {
+    cursor: pointer;
+    padding: 0 1px;
+    position: relative;
+  }
+  
+  .selectable-word:hover {
+    background-color: rgba(255, 255, 0, 0.3);
+  }
+  
+  .selectable-word.selected {
+    background-color: rgba(255, 255, 0, 0.5);
+  }
+  
+  /* Add word form styles */
+  .add-word-form {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 300px;
+  }
+  
+  .form-content {
+    padding: 15px;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
 
 
 /* Word Bank */

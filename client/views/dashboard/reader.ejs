@@ -34,12 +34,11 @@
   
   <div id="word-popup" class="word-popup" style="display: none;">
     <div class="word-popup-content">
+      <div id="translation" class="translation"></div>
       <div class="word-actions">
-        <button id="translate-btn" class="btn btn-sm btn-primary">See Translation</button>
         <button id="add-to-bank-btn" class="btn btn-sm btn-secondary">Add to Word Bank</button>
         <button id="close-popup-btn" class="btn btn-sm btn-light">Close</button>
       </div>
-      <div id="translation" class="translation" style="display: none;"></div>
     </div>
   </div>
   
@@ -67,68 +66,66 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const selectableWords = document.querySelectorAll('.selectable-word');
-    const wordPopup = document.getElementById('word-popup');
-    const translateBtn = document.getElementById('translate-btn');
-    const addToBankBtn = document.getElementById('add-to-bank-btn');
-    const closePopupBtn = document.getElementById('close-popup-btn');
-    const translation = document.getElementById('translation');
-    const addWordForm = document.getElementById('add-word-form');
-    const wordInput = document.getElementById('word');
-    const wordTranslationInput = document.getElementById('word-translation');
-    const wordBankForm = document.getElementById('wordBankForm');
-    const cancelAddWord = document.getElementById('cancel-add-word');
-    
-    let selectedWord = '';
-    let selectedElement = null;
-    
-    // Word selection
-    selectableWords.forEach(word => {
-      word.addEventListener('click', function(e) {
-        e.stopPropagation();
-        
-        // Reset previous selection
-        if (selectedElement) {
-          selectedElement.classList.remove('selected');
-        }
-        
-        // Set new selection
-        selectedWord = this.textContent.replace(/[^\w\s]/g, ''); // Remove punctuation
-        selectedElement = this;
-        this.classList.add('selected');
-        
-        // Position and show popup
-        const rect = this.getBoundingClientRect();
-        /* wordPopup.style.left = `${rect.left}px`;
-        wordPopup.style.top = `${rect.bottom + window.scrollY + 5}px`; */
-        wordPopup.style.display = 'block';
-        
-        // Hide translation if it was showing
-        translation.style.display = 'none';
-      });
-    });
-    
-    // Close popup when clicking elsewhere
-    document.addEventListener('click', function(e) {
-      if (!wordPopup.contains(e.target) && !addWordForm.contains(e.target) && 
-          !e.target.classList.contains('selectable-word')) {
-        wordPopup.style.display = 'none';
-        addWordForm.style.display = 'none';
-        
-        if (selectedElement) {
-          selectedElement.classList.remove('selected');
-          selectedElement = null;
-        }
+document.addEventListener('DOMContentLoaded', function() {
+  const selectableWords = document.querySelectorAll('.selectable-word');
+  const wordPopup = document.getElementById('word-popup');
+  const addToBankBtn = document.getElementById('add-to-bank-btn');
+  const closePopupBtn = document.getElementById('close-popup-btn');
+  const translation = document.getElementById('translation');
+  const addWordForm = document.getElementById('add-word-form');
+  const wordInput = document.getElementById('word');
+  const wordTranslationInput = document.getElementById('word-translation');
+  const wordBankForm = document.getElementById('wordBankForm');
+  const cancelAddWord = document.getElementById('cancel-add-word');
+  
+  let selectedWord = '';
+  let selectedElement = null;
+  
+  // Word selection
+  selectableWords.forEach(word => {
+    word.addEventListener('click', async function(e) {
+      e.stopPropagation();
+      
+      // Reset previous selection
+      if (selectedElement) {
+        selectedElement.classList.remove('selected');
       }
-    });
-    
-    // Translation button
-    translateBtn.addEventListener('click', async function() {
+      
+      // Set new selection
+      selectedWord = this.textContent.replace(/[^\w\s]/g, ''); // Remove punctuation
+      selectedElement = this;
+      this.classList.add('selected');
+      
+      // Position the popup based on click event coordinates
+      const x = e.clientX;
+      const y = e.clientY + window.scrollY;
+      
+      // Ensure popup is within viewport boundaries
+      const popupWidth = 200; // Minimum width from CSS
+      const windowWidth = window.innerWidth;
+      
+      // Calculate left position
+      let leftPos = x - (popupWidth / 2);
+      
+      // Make sure popup doesn't go off the left edge
+      leftPos = Math.max(10, leftPos);
+      
+      // Make sure popup doesn't go off the right edge
+      leftPos = Math.min(windowWidth - popupWidth - 10, leftPos);
+      
+      // Position popup
+      wordPopup.style.left = `${x}px`;
+      wordPopup.style.top = `${y}px`; // 20px below the cursor
+      
+      // Show loading state in the translation area
+      translation.textContent = 'Translating...';
+      translation.style.display = 'block';
+      
+      // Show the popup with loading indicator
+      wordPopup.style.display = 'block';
+      
+      // Fetch translation immediately
       try {
-        translation.textContent = 'Translating...';
-        translation.style.display = 'block';
-        
         const response = await fetch('/api/translate', {
           method: 'POST',
           headers: {
@@ -136,7 +133,7 @@
           },
           body: JSON.stringify({
             text: selectedWord,
-            targetLang: 'pt' // Default to Spanish, could be user-configurable
+            targetLang: 'pt' // Default to Portuguese
           })
         });
         
@@ -153,81 +150,100 @@
         console.error('Translation error:', error);
       }
     });
-    
-    // Add to bank button
-    addToBankBtn.addEventListener('click', function() {
+  });
+  
+  // Close popup when clicking elsewhere
+  document.addEventListener('click', function(e) {
+    if (!wordPopup.contains(e.target) && !addWordForm.contains(e.target) && 
+        !e.target.classList.contains('selectable-word')) {
       wordPopup.style.display = 'none';
-      
-      // Position form near the selected word
-      const rect = selectedElement.getBoundingClientRect();
-      addWordForm.style.left = `${rect.left}px`;
-      addWordForm.style.top = `${rect.bottom + window.scrollY + 5}px`;
-      
-      // Set the word in the form
-      wordInput.value = selectedWord;
-      
-      // Show the form
-      addWordForm.style.display = 'block';
-    });
-    
-    // Close popup button
-    closePopupBtn.addEventListener('click', function() {
-      wordPopup.style.display = 'none';
-      
-      if (selectedElement) {
-        selectedElement.classList.remove('selected');
-        selectedElement = null;
-      }
-    });
-    
-    // Word bank form submission
-    wordBankForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      try {
-        const response = await fetch('/api/word-bank', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            word: wordInput.value,
-            translation: wordTranslationInput.value,
-            bookFilename: '<%= book.filename %>'
-          })
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-          alert('Word added to bank');
-          addWordForm.style.display = 'none';
-          
-          if (selectedElement) {
-            selectedElement.classList.remove('selected');
-            selectedElement = null;
-          }
-        } else {
-          alert('Failed to add word');
-        }
-      } catch (error) {
-        alert('Failed to add word');
-        console.error('Add word error:', error);
-      }
-    });
-    
-    // Cancel add word button
-    cancelAddWord.addEventListener('click', function() {
       addWordForm.style.display = 'none';
       
       if (selectedElement) {
         selectedElement.classList.remove('selected');
         selectedElement = null;
       }
-    });
+    }
+  });
+  
+  // Add to bank button
+  addToBankBtn.addEventListener('click', function() {
+    wordPopup.style.display = 'none';
+    
+    // Position form near the click position if we still have selectedElement
+    if (selectedElement) {
+      const rect = selectedElement.getBoundingClientRect();
+      const x = rect.left + (rect.width / 2);
+      const y = rect.bottom + window.scrollY;
+      
+      addWordForm.style.left = `${x - 150}px`; // Center the form
+      addWordForm.style.top = `${y + 10}px`;
+    }
+    
+    // Set the word in the form
+    wordInput.value = selectedWord;
+    
+    // Show the form
+    addWordForm.style.display = 'block';
+  });
+  
+  // Close popup button
+  closePopupBtn.addEventListener('click', function() {
+    wordPopup.style.display = 'none';
+    
+    if (selectedElement) {
+      selectedElement.classList.remove('selected');
+      selectedElement = null;
+    }
+  });
+  
+  // Word bank form submission
+  wordBankForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch('/api/word-bank', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          word: wordInput.value,
+          translation: wordTranslationInput.value,
+          bookFilename: '<%= book.filename %>'
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        alert('Word added to bank');
+        addWordForm.style.display = 'none';
+        
+        if (selectedElement) {
+          selectedElement.classList.remove('selected');
+          selectedElement = null;
+        }
+      } else {
+        alert('Failed to add word');
+      }
+    } catch (error) {
+      alert('Failed to add word');
+      console.error('Add word error:', error);
+    }
+  });
+  
+  // Cancel add word button
+  cancelAddWord.addEventListener('click', function() {
+    addWordForm.style.display = 'none';
+    
+    if (selectedElement) {
+      selectedElement.classList.remove('selected');
+      selectedElement = null;
+    }
+  });
 
-
-    // Set progress bar widths
+  // Set progress bar widths
   document.querySelectorAll('.progress-bar').forEach(bar => {
     const value = bar.getAttribute('aria-valuenow');
     bar.style.width = value + '%';
@@ -238,8 +254,7 @@
     const bgPath = content.getAttribute('data-background');
     content.style.backgroundImage = `url('${bgPath}')`;
   });
-
-  });
+});
 </script>
 
 <%- include('../partials/footer') %>

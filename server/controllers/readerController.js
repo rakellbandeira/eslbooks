@@ -99,7 +99,7 @@ exports.getBookReader = async (req, res, next) => {
     }
     
     // Create text with spans for each paragraph
-    const textWithSpans = Object.entries(pageContent)
+      const textWithSpans = Object.entries(pageContent)
       .sort(([keyA], [keyB]) => {
         // Sort by paragraph number
         const numA = parseInt(keyA.replace('paragraph', ''));
@@ -107,11 +107,26 @@ exports.getBookReader = async (req, res, next) => {
         return numA - numB;
       })
       .map(([key, paragraph]) => {
-        // Create spans around each word
-        return `<p>${paragraph.split(' ').map(word => 
-          `<span class="selectable-word">${word}</span>`
-        ).join(' ')}</p>`;
+        // Create spans around each word while preserving punctuation
+        return `<p>${
+          // First tokenize the paragraph to separate words and punctuation
+          paragraph.match(/\w+|\s+|[^\w\s]+/g)
+            .map(token => {
+              // If it's a word (contains at least one letter/number), make it selectable
+              if (/\w/.test(token)) {
+                return `<span class="selectable-word">${token}</span>`;
+              } 
+              // Otherwise it's punctuation or whitespace, keep as-is
+              else {
+                return token;
+              }
+            })
+            .join('')
+        }</p>`;
       }).join('');
+
+
+
     
     // Set path to the common background image
     const backgroundImagePath = '/images/book-background.jpg';
