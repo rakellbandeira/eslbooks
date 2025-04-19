@@ -5,6 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
+    "build": "npm install",
     "dev": "nodemon server/server.js",
     "seed-admin": "node server/config/seedAdmin.js"
   },
