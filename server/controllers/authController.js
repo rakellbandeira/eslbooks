@@ -105,7 +105,7 @@ exports.logout = (req, res) => {
 };
 
 // Send password reset email
-exports.forgotPassword = async (req, res) => {
+/* exports.forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
     
@@ -249,6 +249,72 @@ exports.resetPassword = async (req, res) => {
     res.redirect('/login');
   } catch (error) {
     console.error('Reset password error:', error);
+    req.flash('error', 'An error occurred during password reset process');
+    res.redirect('/forgot-password');
+  }
+}; */
+
+
+// Send password reset email
+exports.forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    
+    // Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      req.flash('error', 'No account with that email address exists');
+      return res.redirect('/forgot-password');
+    }
+    
+    // Generate random token (4-digit numeric)
+    const tokenNum = Math.floor(1000 + Math.random() * 9000);
+    const token = tokenNum.toString();
+    
+    // Save token to user record with expiration
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 1200000; // 20 minutes
+    await user.save();
+    
+    // For development/testing purposes or if email is not configured
+    // Skip email sending and go directly to verify token page
+    console.log('Reset token for development:', token);
+    
+    // Store the token temporarily in session so user can test without email
+    req.session.resetToken = token;
+    req.flash('success', 'Reset token generated. For development: ' + token);
+    return res.redirect('/verify-token');
+    
+    /* Comment out email sending for now until it's properly configured
+    // Configure email transport
+    const transporter = nodemailer.createTransport({
+      service: process.env.EMAIL_SERVICE || 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASSWORD
+      }
+    });
+    
+    // Email options
+    const mailOptions = {
+      to: user.email,
+      from: process.env.EMAIL_USER,
+      subject: 'ESL Books Password Reset',
+      text: `You are receiving this email because you (or someone else) requested a password reset for your account.\n\n
+        Please enter the following 4-digit code to complete the process:\n\n
+        ${token}\n\n
+        This code will expire in 20 minutes.\n\n
+        If you did not request this, please ignore this email and your password will remain unchanged.`
+    };
+    
+    // Send email
+    await transporter.sendMail(mailOptions);
+    
+    req.flash('success', 'An email has been sent with further instructions');
+    res.redirect('/verify-token');
+    */
+  } catch (error) {
+    console.error('Forgot password error:', error);
     req.flash('error', 'An error occurred during password reset process');
     res.redirect('/forgot-password');
   }
