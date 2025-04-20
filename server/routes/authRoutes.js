@@ -27,7 +27,7 @@ router.get('/forgot-password', (req, res) => {
   });
 });
 
-router.get('/reset-password/:token', authController.getResetPassword);
+router.get('/reset-password', authController.getResetPassword);
 
 
 // Add to authRoutes.js
@@ -44,7 +44,7 @@ router.post('/login', authController.login);
 router.post('/signup', authController.register);
 router.get('/logout', authController.logout);
 router.post('/forgot-password', authController.forgotPassword);
-router.post('/reset-password/:token', authController.resetPassword);
+router.post('/reset-password', authController.resetPassword);
 router.post('/verify-token', authController.verifyToken);
 
 

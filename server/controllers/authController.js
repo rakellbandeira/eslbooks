@@ -187,7 +187,7 @@ exports.getResetPassword = async (req, res) => {
 };
 
 // Verify token
-exports.verifyToken = async (req, res) => {
+/* exports.verifyToken = async (req, res) => {
   try {
     const { token } = req.body;
     
@@ -209,10 +209,10 @@ exports.verifyToken = async (req, res) => {
     req.flash('error', 'An error occurred during token verification');
     res.redirect('/verify-token');
   }
-};
+}; */
 
 // Process reset password
-exports.resetPassword = async (req, res) => {
+/* exports.resetPassword = async (req, res) => {
   try {
     const { token } = req.params;
     const { password, confirmPassword } = req.body;
@@ -252,7 +252,110 @@ exports.resetPassword = async (req, res) => {
     req.flash('error', 'An error occurred during password reset process');
     res.redirect('/forgot-password');
   }
-}; 
+};  */
+
+
+
+// Verify token
+exports.verifyToken = async (req, res) => {
+  try {
+    const { token } = req.body;
+    
+    // Find user by token and check if token is still valid
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+    
+    if (!user) {
+      req.flash('error', 'Token is invalid or has expired');
+      return res.redirect('/verify-token');
+    }
+    
+    // Instead of redirecting with the token in the URL,
+    // storing it in session and redirecting to a simpler URL
+    req.session.resetToken = token;
+    req.session.resetEmail = user.email;
+    res.redirect('/reset-password');
+  } catch (error) {
+    console.error('Verify token error:', error);
+    req.flash('error', 'An error occurred during token verification');
+    res.redirect('/verify-token');
+  }
+};
+
+// Display the reset form - simplified version
+exports.getResetPassword = async (req, res) => {
+  try {
+    // Check if we have token in session
+    if (!req.session.resetToken) {
+      req.flash('error', 'No valid token found. Please start the password reset process again.');
+      return res.redirect('/forgot-password');
+    }
+    
+    res.render('auth/reset-password', {
+      title: 'Reset Password',
+      token: req.session.resetToken,
+      user: null
+    });
+  } catch (error) {
+    console.error('Reset password error:', error);
+    req.flash('error', 'An error occurred during password reset process');
+    res.redirect('/forgot-password');
+  }
+};
+
+// Process reset password - updated to use session token
+exports.resetPassword = async (req, res) => {
+  try {
+    const { password, confirmPassword } = req.body;
+    const token = req.session.resetToken;
+    
+    if (!token) {
+      req.flash('error', 'Invalid or expired token');
+      return res.redirect('/forgot-password');
+    }
+    
+    // Validate passwords
+    if (password !== confirmPassword) {
+      req.flash('error', 'Passwords do not match');
+      return res.redirect('/reset-password');
+    }
+    
+    if (password.length < 6) {
+      req.flash('error', 'Password must be at least 6 characters');
+      return res.redirect('/reset-password');
+    }
+    
+    // Find user by token and check if token is still valid
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+    
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired');
+      return res.redirect('/forgot-password');
+    }
+    
+    // Set new password and clear token fields
+    user.password = password;
+    user.resetPasswordToken = null;
+    user.resetPasswordExpires = null;
+    await user.save();
+    
+    // Clear session data
+    delete req.session.resetToken;
+    delete req.session.resetEmail;
+    
+    req.flash('success', 'Your password has been updated! Please log in with your new password');
+    res.redirect('/login');
+  } catch (error) {
+    console.error('Reset password error:', error);
+    req.flash('error', 'An error occurred during password reset process');
+    res.redirect('/forgot-password');
+  }
+};
 
 
 // Send password reset email
