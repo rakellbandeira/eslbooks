@@ -105,7 +105,7 @@ exports.logout = (req, res) => {
 };
 
 // Send password reset email
-/* exports.forgotPassword = async (req, res) => {
+exports.forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
     
@@ -252,7 +252,7 @@ exports.resetPassword = async (req, res) => {
     req.flash('error', 'An error occurred during password reset process');
     res.redirect('/forgot-password');
   }
-}; */
+}; 
 
 
 // Send password reset email
@@ -285,8 +285,7 @@ exports.forgotPassword = async (req, res) => {
     req.flash('success', 'Reset token generated. For development: ' + token);
     return res.redirect('/verify-token');
     
-    /* Comment out email sending for now until it's properly configured
-    // Configure email transport
+    /* // Configure email transport
     const transporter = nodemailer.createTransport({
       service: process.env.EMAIL_SERVICE || 'gmail',
       auth: {
@@ -311,8 +310,8 @@ exports.forgotPassword = async (req, res) => {
     await transporter.sendMail(mailOptions);
     
     req.flash('success', 'An email has been sent with further instructions');
-    res.redirect('/verify-token');
-    */
+    res.redirect('/verify-token'); */
+    
   } catch (error) {
     console.error('Forgot password error:', error);
     req.flash('error', 'An error occurred during password reset process');
