@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<div class="auth-container">
+  <div class="auth-form">
+    <h1>Verify Code</h1>
+    
+    <%- include('../partials/messages') %>
+    
+    <p>Enter the 4-digit code that was sent to your email.</p>
+    
+    <form action="/verify-token" method="POST">
+      <div class="form-group">
+        <label for="token">4-Digit Code</label>
+        <input type="text" id="token" name="token" required maxlength="4" pattern="\d{4}">
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Verify Code</button>
+    </form>
+    
+    <p class="auth-link"><a href="/forgot-password">Request a new code</a></p>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

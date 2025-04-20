@@ -83,9 +83,12 @@ if (!isVercel) {
   module.exports = app;
 }
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.VERCEL !== '1') {
   const port = process.env.PORT || 3000;
   app.listen(port, () => {
     console.log(`Server running on port ${port}`);
   });
 }
+
+// Export the Express app
+module.exports = app;
