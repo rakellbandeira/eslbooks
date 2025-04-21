@@ -169,3 +169,65 @@ function getPrevPageInfo(book, currentEpisode, currentPage) {
     pageNumber: currentPage - 1
   };
 }
+
+
+
+exports.getAllBooksWithFilters = async (req, res, next) => {
+  try {
+    // Get all books
+    const books = await loadAllBooks();
+    
+    // Get user's reading progress
+    const userProgress = await UserProgress.find({ userId: req.user._id });
+    
+    // Create a map for easy lookup
+    const progressMap = {};
+    userProgress.forEach(progress => {
+      progressMap[progress.bookFilename] = progress;
+    });
+    
+    // Prepare books with progress
+    const booksWithData = books.map(book => {
+      const progress = progressMap[book.filename];
+      
+      // Extract genres from the book
+      let genres = book.genre ? book.genre.split(',').map(g => g.trim()) : [];
+      
+      return {
+        title: book.title,
+        description: book.description,
+        level: book.level || 'Beginner', // Default to Beginner if not specified
+        genre: book.genre || 'General',  // Default to General if not specified
+        filename: book.filename,
+        coverImage: `/assets/covers/${book.filename.replace('.json', '.jpg')}`,
+        episodeCount: book.episodeQuantity,
+        currentEpisode: progress ? progress.currentEpisode : 1,
+        currentPage: progress ? progress.currentPage : 1,
+        percentComplete: progress ? progress.percentComplete : 0,
+        genres: genres
+      };
+    });
+    
+    // Get unique genres for the filter dropdown
+    const allGenres = new Set();
+    booksWithData.forEach(book => {
+      if (book.genre) {
+        const genres = book.genre.split(',');
+        genres.forEach(genre => {
+          allGenres.add(genre.trim());
+        });
+      }
+    });
+    
+    const uniqueGenres = Array.from(allGenres);
+    
+    res.render('dashboard/all-books', {
+      title: 'Browse All Books',
+      books: booksWithData,
+      genres: uniqueGenres,
+      user: req.user
+    });
+  } catch (error) {
+    next(error);
+  }
+};

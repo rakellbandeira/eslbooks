@@ -1,4 +1,5 @@
 <%- include('../partials/header') %>
+<a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
 
 <div class="container">
   <h1>My Word Bank</h1>
@@ -17,8 +18,6 @@
         </div>
       </div>
     </form>
-    
-    <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
   </div>
   
   <div class="wordbank-content">
@@ -39,10 +38,10 @@
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                      <th>Word</th>
+                      <!-- <th>Word</th>
                       <th>Translation</th>
-                      <th>Source</th>
-                      <th>Actions</th>
+                      
+                      <th>Actions</th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -50,14 +49,8 @@
                       <tr>
                         <td><%= word.word %></td>
                         <td><%= word.translation %></td>
-                        <td>
-                          <% if (word.bookTitle) { %>
-                            <%= word.bookTitle %>
-                          <% } else { %>
-                            N/A
-                          <% } %>
-                        </td>
-                        <td>
+                        
+                        <td class="wordBankactions">
                           <div class="btn-group">
                             <a href="/word-bank/edit/<%= word._id %>" class="btn btn-sm btn-primary">Edit</a>
                             <a href="/word-bank/delete/<%= word._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this word?')">Delete</a>

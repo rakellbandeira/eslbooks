@@ -64,6 +64,32 @@
       </form>
     </div>
   </div>
+
+
+  <div class="reader-header">
+    <div class="book-info">
+
+      <h2>Episode <%= currentEpisode %>: <%= book.episodeTitle %></h2>
+    </div>
+    <div class="reader-controls">
+      <div class="page-navigation">
+        <% if (prevPage) { %>
+          <a href="/book/read/<%= book.filename %>?episode=<%= prevPage.episodeNumber %>&page=<%= prevPage.pageNumber %>" class="btn btn-primary">Previous Page</a>
+        <% } %>
+        
+        <span class="page-info">Page <%= currentPage %> of <%= totalPagesInEpisode %> (Episode <%= currentEpisode %>)</span>
+        
+        <% if (nextPage) { %>
+          <a href="/book/read/<%= book.filename %>?episode=<%= nextPage.episodeNumber %>&page=<%= nextPage.pageNumber %>" class="btn btn-primary">Next Page</a>
+        <% } %>
+      </div>
+
+      <!-- Changed path here from /book to /dashboard -->
+      <a href="/dashboard" class="btn btn-secondary close-btn">Close</a>
+    </div>
+  </div>
+  
+
 </div>
 
 <script>

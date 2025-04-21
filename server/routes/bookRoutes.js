@@ -27,6 +27,8 @@ router.get('/book/read/:filename', authenticate, authorize('client'), async (req
     }
   });
 
+router.get('/all-books', authenticate, authorize('client', 'admin'), bookController.getAllBooksWithFilters);
+
 
 
   

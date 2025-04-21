@@ -49,43 +49,40 @@ exports.getClientDashboard = async (req, res, next) => {
       };
     }
     
-     // Get some books for the dashboard (limit to 3)
-    /*  const progressMap = {};
-     userProgress.forEach(p => {
-       progressMap[p.bookFilename] = p;
-     }); */
-     
-     const books = allBooks.slice(0, 3).map(book => {
-       const progress = progressMap[book.filename];
+    // Get only books with reading progress
+    const booksWithProgress = [];
     
-
-      return {
-        title: book.title,
-        description: book.description,
-        level: book.level,
-        filename: book.filename,
-        coverImage: `/assets/covers/${book.filename.replace('.json', '.jpg')}`,
-        episodeCount: book.episodeQuantity,
-        currentEpisode: progress ? progress.currentEpisode : 1,
-        currentPage: progress ? progress.currentPage : 1,
-        percentComplete: progress ? progress.percentComplete : 0
-      };
+    userProgress.forEach(progress => {
+      if (bookMap[progress.bookFilename]) {
+        const book = bookMap[progress.bookFilename];
+        booksWithProgress.push({
+          title: book.title,
+          description: book.description,
+          level: book.level,
+          filename: book.filename,
+          coverImage: `/assets/covers/${book.filename.replace('.json', '.jpg')}`,
+          episodeCount: book.episodeQuantity,
+          currentEpisode: progress.currentEpisode,
+          currentPage: progress.currentPage,
+          percentComplete: progress.percentComplete,
+          lastRead: progress.lastRead
+        });
+      }
     });
 
-
-    console.log("Dashboard - Books display:", JSON.stringify(books.map(b => ({ 
-        title: b.title, 
-        percentComplete: b.percentComplete 
-      })), null, 2));
-
+    console.log("Dashboard - Books display:", JSON.stringify(booksWithProgress.map(b => ({ 
+      title: b.title, 
+      percentComplete: b.percentComplete 
+    })), null, 2));
     
     res.render('dashboard/index', {
       title: 'Dashboard',
       currentBook,
-      books,
+      books: booksWithProgress,
       wordCount,
       user: req.user
     });
+    
   } catch (error) {
     next(error);
   }

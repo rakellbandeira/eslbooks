@@ -1,0 +1,101 @@
+<%- include('../partials/header') %>
+<a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+<div class="container">
+  <h1>Browse All Books</h1>
+  
+  <%- include('../partials/messages') %>
+  
+  <div class="filter-controls">
+    <div class="row" id="filters">
+      <div class="filter">
+        <label for="genre-filter">Filter by Genre:</label>
+        <select id="genre-filter" class="form-control">
+          <option value="">All Genres</option>
+          <% genres.forEach(genre => { %>
+            <option value="<%= genre %>"><%= genre %></option>
+          <% }); %>
+        </select>
+      </div>
+      <div class="filter">
+        <label for="level-filter">Filter by Level:</label>
+        <select id="level-filter" class="form-control">
+          <option value="">All Levels</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+      <div class="filter">
+        <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="books-container">
+    <% if (books && books.length > 0) { %>
+      <% books.forEach(book => { %>
+        <div class="book-row mb-4" data-genre="<%= book.genre.toLowerCase() %>" data-level="<%= book.level.toLowerCase() %>">
+          <div class="row" id="bookRow">
+            <div class="col-md-3">
+              <img src="<%= book.coverImage %>" class="img-fluid book-cover" alt="<%= book.title %>">
+            </div>
+            <div class="col-md-9">
+              <h3><%= book.title %></h3>
+              <p><%= book.description %></p>
+              <div class="book-meta">
+                <span class="badge badge-primary mr-2"><%= book.level %></span>
+                <span class="badge badge-secondary mr-2"><%= book.genre %></span>
+              </div>
+              <% if (book.percentComplete > 0) { %>
+                <a href="/book/read/<%= book.filename %>?episode=<%= book.currentEpisode %>&page=<%= book.currentPage %>" class="btn btn-primary">Continue Reading</a>
+              <% } else { %>
+                <a href="/book/read/<%= book.filename %>?episode=1&page=1" class="btn btn-primary mt-3">Start Reading</a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    <% } else { %>
+      <div class="no-books">
+        <p>No books available yet. Check back soon!</p>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
+    const genreFilter = document.getElementById('genre-filter');
+    const levelFilter = document.getElementById('level-filter');
+    const applyButton = document.getElementById('apply-filters');
+    const booksContainer = document.getElementById('books-container');
+    const bookRows = document.querySelectorAll('.book-row');
+    
+    // Apply filters function
+    function applyFilters() {
+      const selectedGenre = genreFilter.value.toLowerCase();
+      const selectedLevel = levelFilter.value.toLowerCase();
+      
+      bookRows.forEach(book => {
+        const bookGenre = book.getAttribute('data-genre');
+        const bookLevel = book.getAttribute('data-level');
+        
+        // Check if book matches both filters
+        const genreMatch = !selectedGenre || bookGenre.includes(selectedGenre);
+        const levelMatch = !selectedLevel || bookLevel === selectedLevel;
+        
+        if (genreMatch && levelMatch) {
+          book.style.display = 'block';
+        } else {
+          book.style.display = 'none';
+        }
+      });
+    }
+    
+    // Event listeners
+    applyButton.addEventListener('click', applyFilters);
+  });
+</script>
+
+<%- include('../partials/footer') %>

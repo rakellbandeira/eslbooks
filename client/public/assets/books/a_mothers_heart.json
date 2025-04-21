@@ -1,0 +1,112 @@
+{
+    "title": "A Mother's Heart",
+    "description": "The story of Ana, who learns to balance protection with encouragement as she grows from child to mother.",
+    "level": "Beginner",
+    "genre": "family, slice of life",
+    "episodeQuantity": 5,
+    "episodeTitles": [
+        {
+            "episode1": "Little Ana",
+            "episode2": "At School",
+            "episode3": "Ana's Baby",
+            "episode4": "Baby Lily",
+            "episode5": "Full Circle"
+        }
+    ],
+    "episodeContents": [
+        {
+            "episode1": [
+                {
+                    "page1": [
+                        {
+                            "paragraph1": "Ana is a little girl. She lives with Mom and Dad.",
+                            "paragraph2": "Mom says, 'Be safe, Ana.'",
+                            "paragraph3": "Dad says, 'Try new things, Ana.'",
+                            "paragraph4": "Ana likes to run. She likes to jump. She likes to climb.",
+                            "paragraph5": "When Ana falls, she cries.",
+                            "paragraph6": "Mom says, 'See? No more climbing.'",
+                            "paragraph7": "Dad says, 'It's OK. Try again.'",
+                            "paragraph8": "Ana does not know who is right.",
+                            "paragraph9": "She likes Mom's hugs when she is sad.",
+                            "paragraph10": "She likes Dad's smile when she tries again.",
+                            "paragraph11": "Years go by. Ana grows big.",
+                            "paragraph12": "She learns from Mom: be safe. She learns from Dad: be brave.",
+                            "paragraph13": "Both will help Ana when she is a mom too."
+                        }
+                    ]
+                }
+            ],
+            "episode2": [
+                {
+                    "page1": [
+                        {
+                            "paragraph1": "Ana is at school. A girl says, 'Bad dress.'",
+                            "paragraph2": "Ana wants to cry.",
+                            "paragraph3": "Ana thinks of Mom. Mom says be safe.",
+                            "paragraph4": "Ana thinks of Dad. Dad says be strong.",
+                            "paragraph5": "Ana says, 'I like my dress.'",
+                            "paragraph6": "The girl walks away.",
+                            "paragraph7": "Ana feels good.",
+                            "paragraph8": "Ana is safe like Mom.",
+                            "paragraph9": "Ana is brave like Dad."
+                        }
+                    ]
+                }
+            ],
+            "episode3": [
+                {
+                    "page1": [
+                        {
+                            "paragraph1": "Ana is now big. Ana has a husband, Tom.",
+                            "paragraph2": "Ana says, 'We have a baby soon.'",
+                            "paragraph3": "Tom is happy. Ana is happy.",
+                            "paragraph4": "But Ana is scared too.",
+                            "paragraph5": "Ana calls Mom. 'I am scared.'",
+                            "paragraph6": "Mom says, 'It is OK.'",
+                            "paragraph7": "Ana calls Dad. 'How to be brave?'",
+                            "paragraph8": "Dad says, 'You are brave.'",
+                            "paragraph9": "Ana feels the baby move. It is a girl.",
+                            "paragraph10": "Ana says, 'I keep you safe. I help you try.'"
+                        }
+                    ]
+                }
+            ],
+            "episode4": [
+                {
+                    "page1": [
+                        {
+                            "paragraph1": "The baby is here. Her name is Lily.",
+                            "paragraph2": "Lily cries. Ana is tired but happy.",
+                            "paragraph3": "Ana asks, 'Is Lily OK?'",
+                            "paragraph4": "Doctor says, 'Yes.'",
+                            "paragraph5": "Ana still worries. What if Lily gets hurt?",
+                            "paragraph6": "Tom says, 'We help her.'",
+                            "paragraph7": "Lily smiles. Ana is happy.",
+                            "paragraph8": "Ana sees now. Babies need love.",
+                            "paragraph9": "Babies need to try new things too.",
+                            "paragraph10": "Ana says to Lily, 'I love you. You can do it.'"
+                        }
+                    ]
+                }
+            ],
+            "episode5": [
+                {
+                    "page1": [
+                        {
+                            "paragraph1": "Lily is three now. She wants to climb a tree.",
+                            "paragraph2": "Ana feels scared. But she says, 'OK, try.'",
+                            "paragraph3": "Tom stands near. 'I help if you fall.'",
+                            "paragraph4": "Lily climbs. Lily falls. Tom catches her.",
+                            "paragraph5": "Ana wants to say, 'No more.'",
+                            "paragraph6": "But she says, 'Try again?'",
+                            "paragraph7": "Lily climbs again. Lily does not fall.",
+                            "paragraph8": "Mom and Dad visit. They see Lily in the tree.",
+                            "paragraph9": "They say, 'Ana, you are a good mom.'",
+                            "paragraph10": "Ana smiles."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
