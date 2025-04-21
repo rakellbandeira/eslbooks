@@ -19,7 +19,7 @@ const BookSchema = new mongoose.Schema({
   },
   level: {
     type: String,
-    enum: ['Beginner', 'Intermediate', 'Advanced'],
+    enum: ['Early Beginner', 'Beginner', 'Intermediate', 'Advanced'],
     required: [true, 'Level is required']
   },
   isActive: {

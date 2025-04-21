@@ -196,7 +196,7 @@ exports.getAllBooksWithFilters = async (req, res, next) => {
       return {
         title: book.title,
         description: book.description,
-        level: book.level || 'Beginner', // Default to Beginner if not specified
+        level: book.level || 'Early Beginner', // Default to Beginner if not specified
         genre: book.genre || 'General',  // Default to General if not specified
         filename: book.filename,
         coverImage: `/assets/covers/${book.filename.replace('.json', '.jpg')}`,
