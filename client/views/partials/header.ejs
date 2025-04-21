@@ -13,8 +13,13 @@
       <div class="logo">
         <a href="/">ESL Books</a>
       </div>
+      <button class="hamburger" id="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <nav class="main-nav">
-        <ul>
+        <ul id="main-menu">
           <li><a href="/">Home</a></li>
           <% if (typeof user !== 'undefined' && user !== null) { %>
             <% if (user.role === 'admin') { %>

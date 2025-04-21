@@ -10,14 +10,26 @@
     line-height: 1.6;
     color: #333;
     background-color: #f8f9fa;
+    min-height: 100vh; /* Ensure minimum height is full viewport */
+    display: flex;
+    flex-direction: column; 
   }
   
   .container {
+    /* display: flex; */
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 0 15px;
+    flex: 1; 
+    
   }
+
+  .container h1{
+    margin: 20px;
+  }
+
+ 
   
   /* Header */
   .main-header {
@@ -64,7 +76,8 @@
     background-color: #333;
     color: #fff;
     padding: 20px 0;
-    margin-top: 50px;
+    margin-top: auto;
+    width: 100%;
     text-align: center;
   }
   
@@ -72,6 +85,7 @@
   .btn {
     display: inline-block;
     padding: 10px 20px;
+    margin: 20px auto;
     border: none;
     border-radius: 4px;
     font-size: 16px;
@@ -305,6 +319,7 @@
   
   .dashboard-actions, .admin-actions {
     display: flex;
+    flex-direction: column;
     gap: 15px;
     margin-bottom: 30px;
   }
@@ -318,6 +333,59 @@
     color: #333;
   }
 
+
+.book-row {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+  transition: transform 0.3s;
+}
+
+.book-row:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.book-cover {
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.book-meta {
+  margin: 15px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.badge-primary {
+  background-color: #0066cc;
+  color: #fff;
+}
+
+.badge-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.filter-controls {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+#bookRow{
+  margin-bottom: 10px;
+}
 
 /* Book cards */
 .book-list {
@@ -465,37 +533,6 @@
   }
   
   .reader-content {
-    /* background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden; */
-
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    background-image: url('/images/book-background.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-  }
-  
-  .page-image {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .page-image img {
-    max-width: 100%;
-    border-radius: 8px 8px 0 0;
-  }
-  
-  .page-text {
-   /*  padding: 20px;
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 40px; */
-
     padding: 40px;
     font-size: 18px;
     line-height: 1.6;
@@ -658,7 +695,7 @@
 
 .form-control {
   width: 100%;
-  padding: 6px 8px;
+  padding: 15px 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -723,7 +760,7 @@
   .letter-heading {
     background-color: #0066cc;
     color: #fff;
-    padding: 10px 15px;
+    padding: 6px 15px;
     border-radius: 4px;
     margin-bottom: 15px;
   }
@@ -749,15 +786,91 @@
   .book-info h4 {
     margin-bottom: 15px;
   }
+
+  .table{
+    width: 100%;
+  }
+
+  .table tbody{
+    font-size: 1.2rem;
+  }
+
+  .table tbody tr{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.1fr;
+    justify-content: center;
+    align-items: center;
+    margin: auto 10px;
+  }
+
+  .table-responsive {
+    width: 100%;
+  }
+
+  .wordBankactions div{
+    margin: auto 5px;
+  }
+
+  .wordBankactions div a{
+    font-size: 0.9rem;
+    padding: 7px 10px;
+
+  }
+
+
+
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 5px;
+  }
   
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 2px 0;
+    background-color: #333;
+    transition: all 0.3s ease;
+  }
+
+  #filters{
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+  }
 
 
   
   /* Responsive adjustments*/
+  
+  .book-list-section{
+    margin: 70px auto;
+  }
+
   @media (max-width: 768px) {
+    #dashboardAllBooks, #dashboardWordBank {
+      display: flex;
+      font-size: 1.5rem;
+      padding: 15px 25px;
+      border-radius: 6px;
+      margin: 0;
+      justify-content: center;
+    }
+
+    .row{
+      display: grid;
+      grid-template-columns: 1fr;
+      margin: 20px auto 50px ;
+      justify-items: center;
+    }
+
     .reader-header {
       flex-direction: column;
       align-items: flex-start;
+      margin: 20px auto;
     }
     
     .reader-controls {
@@ -788,4 +901,53 @@
       .alphabet-navigation {
         justify-content: center;
       }
+
+      .hamburger {
+        display: block;
+      }
+
+      #hamburger-menu {
+        display: grid;
+        justify-content: right;
+        
+        
+      }
+      
+      .main-nav ul {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        flex-direction: column;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 100;
+      }
+      
+      .main-nav ul.show {
+        display: flex;
+      }
+      
+      .main-nav li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .main-nav a {
+        padding: 15px;
+        display: block;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .main-header .container {
+        position: relative;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr;
+        justify-content: space-between;
+        padding: 0px 40px;
+      }
+
   }
