@@ -16,7 +16,7 @@
       <nav class="main-nav">
         <ul>
           <li><a href="/">Home</a></li>
-          <% if (typeof user !== 'undefined') { %>
+          <% if (typeof user !== 'undefined' && user !== null) { %>
             <% if (user.role === 'admin') { %>
               <li><a href="/admin/dashboard">Admin Dashboard</a></li>
             <% } else { %>

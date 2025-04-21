@@ -177,7 +177,7 @@ exports.getResetPassword = async (req, res) => {
     res.render('auth/reset-password', {
       title: 'Reset Password',
       token,
-      user: null
+      user: {}
     });
   } catch (error) {
     console.error('Reset password error:', error);
