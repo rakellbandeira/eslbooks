@@ -370,53 +370,81 @@ exports.forgotPassword = async (req, res) => {
       return res.redirect('/forgot-password');
     }
     
-    // Generate random token (4-digit numeric)
-    const tokenNum = Math.floor(1000 + Math.random() * 9000);
-    const token = tokenNum.toString();
     
-    // Save token to user record with expiration
-    user.resetPasswordToken = token;
-    user.resetPasswordExpires = Date.now() + 1200000; // 20 minutes
-    await user.save();
+    // Store the user's email in session to identify them during password reset
+    req.session.resetEmail = email;
     
-    // For development/testing purposes or if email is not configured
-    // Skip email sending and go directly to verify token page
-    console.log('Reset token for development:', token);
-    
-    // Store the token temporarily in session so user can test without email
-    req.session.resetToken = token;
-    req.flash('success', 'Reset token generated. For development: ' + token);
-    return res.redirect('/verify-token');
-    
-    /* // Configure email transport
-    const transporter = nodemailer.createTransport({
-      service: process.env.EMAIL_SERVICE || 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD
-      }
-    });
-    
-    // Email options
-    const mailOptions = {
-      to: user.email,
-      from: process.env.EMAIL_USER,
-      subject: 'ESL Books Password Reset',
-      text: `You are receiving this email because you (or someone else) requested a password reset for your account.\n\n
-        Please enter the following 4-digit code to complete the process:\n\n
-        ${token}\n\n
-        This code will expire in 20 minutes.\n\n
-        If you did not request this, please ignore this email and your password will remain unchanged.`
-    };
-    
-    // Send email
-    await transporter.sendMail(mailOptions);
-    
-    req.flash('success', 'An email has been sent with further instructions');
-    res.redirect('/verify-token'); */
-    
+    // Redirect to reset password page
+    req.flash('success', 'Email verified. Please set your new password.');
+    res.redirect('/reset-password');
   } catch (error) {
     console.error('Forgot password error:', error);
+    req.flash('error', 'An error occurred during password reset process');
+    res.redirect('/forgot-password');
+  }
+};
+
+// Modify the getResetPassword function
+exports.getResetPassword = async (req, res) => {
+  try {
+    // Check if resetEmail exists in session
+    if (!req.session.resetEmail) {
+      req.flash('error', 'Please enter your email first');
+      return res.redirect('/forgot-password');
+    }
+    
+    res.render('auth/reset-password', {
+      title: 'Reset Password',
+      user: {}  // Empty user object to prevent header error
+    });
+  } catch (error) {
+    console.error('Reset password error:', error);
+    req.flash('error', 'An error occurred during password reset process');
+    res.redirect('/forgot-password');
+  }
+};
+
+// Modify the resetPassword function
+exports.resetPassword = async (req, res) => {
+  try {
+    const { password, confirmPassword } = req.body;
+    const email = req.session.resetEmail;
+    
+    if (!email) {
+      req.flash('error', 'Email verification expired. Please try again.');
+      return res.redirect('/forgot-password');
+    }
+    
+    // Validate passwords
+    if (password !== confirmPassword) {
+      req.flash('error', 'Passwords do not match');
+      return res.redirect('/reset-password');
+    }
+    
+    if (password.length < 6) {
+      req.flash('error', 'Password must be at least 6 characters');
+      return res.redirect('/reset-password');
+    }
+    
+    // Find user by email
+    const user = await User.findOne({ email });
+    
+    if (!user) {
+      req.flash('error', 'User not found');
+      return res.redirect('/forgot-password');
+    }
+    
+    // Set new password
+    user.password = password;
+    await user.save();
+    
+    // Clear session data
+    delete req.session.resetEmail;
+    
+    req.flash('success', 'Your password has been updated! Please log in with your new password');
+    res.redirect('/login');
+  } catch (error) {
+    console.error('Reset password error:', error);
     req.flash('error', 'An error occurred during password reset process');
     res.redirect('/forgot-password');
   }

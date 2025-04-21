@@ -30,22 +30,13 @@ router.get('/forgot-password', (req, res) => {
 router.get('/reset-password', authController.getResetPassword);
 
 
-// Add to authRoutes.js
-router.get('/verify-token', (req, res) => {
-  res.render('auth/verify-token', {
-    title: 'Verify Token',
-    user: req.user
-  });
-});
-
-
 // POST routes for form submissions
 router.post('/login', authController.login);
 router.post('/signup', authController.register);
 router.get('/logout', authController.logout);
 router.post('/forgot-password', authController.forgotPassword);
 router.post('/reset-password', authController.resetPassword);
-router.post('/verify-token', authController.verifyToken);
+
 
 
 module.exports = router;
