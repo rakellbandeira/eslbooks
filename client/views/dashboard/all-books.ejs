@@ -37,7 +37,7 @@
       <% books.forEach(book => { %>
         <div class="book-row mb-4" data-genre="<%= book.genre.toLowerCase() %>" data-level="<%= book.level.toLowerCase() %>">
           <div class="row" id="bookRow">
-            <div class="col-md-3">
+            <div class="bookImg">
               <img src="<%= book.coverImage %>" class="img-fluid book-cover" alt="<%= book.title %>">
             </div>
             <div class="col-md-9">
