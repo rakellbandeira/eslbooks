@@ -870,9 +870,16 @@
       margin: 20px auto;
     }
 
+    .dashboard-actions, .admin-actions {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
     #dashboardAllBooks, #dashboardWordBank {
       display: flex;
-      flex-direction: column;
+      
       font-size: 1.5rem;
       padding: 15px 25px;
       border-radius: 6px;
