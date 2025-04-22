@@ -139,8 +139,15 @@
   /* Home page */
   .hero {
     background-color: #e9ecef;
+    /* background-image: url("/client/public/images/backg.png");
+    background-repeat: no-repeat;
+    background-size: cover; */
     padding: 80px 0;
     text-align: center;
+  }
+
+  .hero img{
+    width: 100%;
   }
   
   .hero h1 {
