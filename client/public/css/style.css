@@ -319,11 +319,12 @@
   
   .dashboard-actions, .admin-actions {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 15px;
     margin-bottom: 30px;
   }
-  
+
+   
   .book-list-section {
     margin: 40px auto;
   }
@@ -871,6 +872,7 @@
 
     #dashboardAllBooks, #dashboardWordBank {
       display: flex;
+      flex-direction: column;
       font-size: 1.5rem;
       padding: 15px 25px;
       border-radius: 6px;
