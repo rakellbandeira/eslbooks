@@ -20,7 +20,7 @@
       </div>
 
       <!-- Changed path here from /book to /dashboard -->
-      <a href="/dashboard" class="btn btn-secondary close-btn">Close</a>
+      <a href="<%= previousPage %>" class="btn btn-secondary close-btn">Close</a>
     </div>
 
 
@@ -115,6 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const isFirstPage = <%= isFirstPageOfEpisode %>;
   const episodeNumber = <%= currentEpisode %>;
   const filename = '<%= book.filename %>';
+  const isFirstPage = <%= isFirstPageOfEpisode %>;
+  const episodeNumber = <%= currentEpisode %>;
+  const filename = '<%= book.filename %>';
+
+
   
   let selectedWord = '';
   let selectedSentence = '';
@@ -394,11 +399,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // Show vocabulary popup if it's the first page of an episode
-    if (isFirstPage) {
+  if (isFirstPage) {
       setTimeout(() => {
         showVocabPopup(filename, episodeNumber);
-      }, 500); // Small delay to ensure page is loaded
-    }
+      }, 500); // Small delay to make it gracious
+  }
+
+
 
 
 });

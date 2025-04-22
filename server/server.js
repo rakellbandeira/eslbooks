@@ -90,5 +90,24 @@ if (process.env.VERCEL !== '1') {
   });
 }
 
+
+// Trying to track previous pages
+app.use((req, res, next) => {
+  // Excluding routes from being remembered: API routes, static files
+  const excludedPaths = ['/api/', '/js/', '/css/', '/images/', '/assets/'];
+  const shouldTrack = !excludedPaths.some(path => req.path.startsWith(path));
+  
+  // Not tracking the book reading page itself
+  const isBookReadingPage = req.path.startsWith('/book/read/');
+  
+  if (shouldTrack && !isBookReadingPage && req.method === 'GET') {
+    // Storing the current URL as the referer for the next request
+    req.session.previousPage = req.originalUrl || '/dashboard';
+  }
+  
+  next();
+});
+
+
 // Export the Express app
 module.exports = app;

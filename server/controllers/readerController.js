@@ -144,7 +144,8 @@ exports.getBookReader = async (req, res, next) => {
       textWithSpans,
       backgroundImagePath,
       isFirstPageOfEpisode: pageNum === 1, // Add this for the vocabulary popup
-      user: req.user
+      user: req.user,
+      previousPage: req.session.previousPage || '/dashboard'
     });
   } catch (error) {
     next(error);

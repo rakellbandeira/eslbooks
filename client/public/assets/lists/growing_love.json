@@ -1,0 +1,118 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to look": "olhar",
+            "to call": "ligar/chamar",
+            "to meet": "encontrar/conhecer",
+            "to walk": "caminhar",
+            "empty": "vazio",
+            "quiet": "silencioso",
+            "garden": "jardim",
+            "community": "comunidade",
+            "soil": "solo",
+            "plot": "terreno",
+            "coordinator": "coordenador",
+            "daughter": "filha",
+            "nervous": "nervoso"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to show": "mostrar",
+            "to prepare": "preparar",
+            "to grow": "crescer",
+            "to learn": "aprender",
+            "to work": "trabalhar",
+            "to join": "juntar-se",
+            "seeds": "sementes",
+            "flowers": "flores",
+            "tomatoes": "tomates",
+            "compost": "adubo",
+            "widow": "viúva",
+            "friendship": "amizade",
+            "retirement": "aposentadoria"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to invite": "convidar",
+            "to cook": "cozinhar",
+            "to paint": "pintar",
+            "to wonder": "perguntar-se",
+            "to reach": "alcançar",
+            "to shine": "brilhar",
+            "sun": "sol",
+            "colors": "cores",
+            "pasta": "macarrão",
+            "recipe": "receita",
+            "cake": "bolo",
+            "butterflies": "borboletas",
+            "nervous": "nervoso"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to feel": "sentir",
+            "to kiss": "beijar",
+            "to burst": "explodir",
+            "to laugh": "rir",
+            "to set": "arrumar",
+            "to interrupt": "interromper",
+            "summer": "verão",
+            "bench": "banco",
+            "candles": "velas",
+            "plates": "pratos",
+            "love": "amor",
+            "tears": "lágrimas",
+            "awkward": "constrangedor"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to confront": "confrontar",
+            "to worry": "preocupar-se",
+            "to miss": "sentir falta",
+            "to disappear": "desaparecer",
+            "to answer": "responder",
+            "to shake": "tremer",
+            "money": "dinheiro",
+            "address": "endereço",
+            "joy": "alegria",
+            "approve": "aprovar",
+            "alive": "vivo",
+            "careful": "cuidadoso",
+            "protective": "protetor"
+          }
+        ]
+      },
+      {
+        "episode6": [
+          {
+            "to admit": "admitir",
+            "to understand": "entender",
+            "to accept": "aceitar",
+            "to plan": "planejar",
+            "to bloom": "florescer",
+            "to change": "mudar",
+            "fall": "outono",
+            "spring": "primavera",
+            "necklace": "colar",
+            "pendant": "pingente",
+            "thanksgiving": "ação de graças",
+            "patience": "paciência",
+            "gratitude": "gratidão"
+          }
+        ]
+      }
+    ]
+  }

@@ -1,0 +1,124 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to delete": "excluir",
+            "to give up": "desistir",
+            "to change": "mudar",
+            "to approach": "abordar",
+            "to fall": "cair apaixonado",
+            "shapeshifter": "metamorfo",
+            "dating app": "aplicativo de namoro",
+            "appearance": "aparência",
+            "mirror": "espelho",
+            "disguise": "disfarce",
+            "rejection": "rejeição",
+            "mistake": "erro",
+            "obsessed": "obcecado",
+            "disappointed": "desapontado"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to remind": "lembrar",
+            "to explain": "explicar",
+            "to maintain": "manter",
+            "to confess": "confessar",
+            "to notice": "notar",
+            "to feel": "sentir",
+            "commitment": "compromisso",
+            "expression": "expressão",
+            "breakup": "término",
+            "gesture": "gesto",
+            "pattern": "padrão",
+            "memories": "memórias",
+            "suspicious": "desconfiado",
+            "familiar": "familiar"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to pace": "andar de um lado para outro",
+            "to reveal": "revelar",
+            "to catch": "pegar",
+            "to plan": "planejar",
+            "to warn": "avisar",
+            "to convince": "convencer",
+            "connection": "conexão",
+            "stalker": "perseguidor",
+            "research": "pesquisa",
+            "evidence": "evidência",
+            "strategy": "estratégia",
+            "spreadsheet": "planilha",
+            "curious": "curioso",
+            "freaked out": "assustado"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to agree": "concordar",
+            "to connect": "conectar",
+            "to create": "criar",
+            "to discover": "descobrir",
+            "to love": "amar",
+            "to offer": "oferecer",
+            "relationship": "relacionamento",
+            "hope": "esperança",
+            "chance": "oportunidade",
+            "conversation": "conversa",
+            "party": "festa",
+            "secret": "segredo",
+            "genuine": "genuíno",
+            "nervous": "nervoso"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to worry": "preocupar-se",
+            "to promise": "prometer",
+            "to deepen": "aprofundar",
+            "to wrestle": "lutar",
+            "to broach": "abordar",
+            "to settle": "estabelecer",
+            "routine": "rotina",
+            "cloud": "nuvem",
+            "territory": "território",
+            "rumor": "rumor",
+            "apartment": "apartamento",
+            "problem": "problema",
+            "confused": "confuso",
+            "resolute": "resoluto"
+          }
+        ]
+      },
+      {
+        "episode6": [
+          {
+            "to track": "rastrear",
+            "to target": "atingir",
+            "to expose": "expor",
+            "to sacrifice": "sacrificar",
+            "to forgive": "perdoar",
+            "to heal": "curar",
+            "experience": "experiência",
+            "therapy": "terapia",
+            "truth": "verdade",
+            "confession": "confissão",
+            "penance": "penitência",
+            "betrayal": "traição",
+            "honest": "honesto",
+            "complicated": "complicado"
+          }
+        ]
+      }
+    ]
+  }
