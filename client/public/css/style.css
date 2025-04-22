@@ -853,11 +853,19 @@
   
   /* Responsive adjustments*/
   
-  .book-list-section{
-    margin: 70px auto;
-  }
+  
 
   @media (max-width: 768px) {
+
+    .book-list-section{
+      margin: 70px auto;
+    }
+
+    #bookRow{
+      display: flex;
+      flex-direction: column;
+    }
+
     #dashboardAllBooks, #dashboardWordBank {
       display: flex;
       font-size: 1.5rem;
