@@ -1,0 +1,109 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to arrive": "chegar",
+            "to smile": "sorrir",
+            "to stare": "encarar",
+            "to rent": "alugar",
+            "to unpack": "desempacotar",
+            "to watch": "observar",
+            "mysterious": "misteriosa",
+            "suspicious": "desconfiada",
+            "dark": "escuro",
+            "exotic": "exótico",
+            "detective": "detetive",
+            "suitcase": "mala",
+            "hotel": "hotel",
+            "attention": "atenção",
+            "stranger": "estranho/estranha"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to change": "mudar",
+            "to donate": "doar",
+            "to approve": "aprovar",
+            "to suggest": "sugerir",
+            "to whisper": "sussurrar",
+            "to assume": "presumir",
+            "to influence": "influenciar",
+            "to intervene": "intervir",
+            "connection": "conexão",
+            "rumor": "rumor",
+            "blackmail": "chantagem",
+            "shelter": "abrigo",
+            "powerful": "poderoso",
+            "unexpected": "inesperado",
+            "worried": "preocupado"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to search": "procurar",
+            "to investigate": "investigar",
+            "to disappear": "desaparecer",
+            "to recognize": "reconhecer",
+            "to escape": "escapar",
+            "to walk": "caminhar",
+            "to discover": "descobrir",
+            "abuse": "abuso",
+            "evidence": "evidência",
+            "husband": "marido",
+            "article": "artigo",
+            "identity": "identidade",
+            "afraid": "com medo",
+            "courage": "coragem",
+            "vulnerable": "vulnerável"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to volunteer": "voluntariar-se",
+            "to challenge": "desafiar",
+            "to defend": "defender",
+            "to pack": "fazer as malas",
+            "to protect": "proteger",
+            "to hide": "esconder",
+            "to trust": "confiar",
+            "suicide": "suicídio",
+            "community": "comunidade",
+            "relationship": "relacionamento",
+            "police": "polícia",
+            "gun": "arma",
+            "corrupt": "corrupto",
+            "safe": "seguro",
+            "careful": "cuidadoso"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to surround": "cercar",
+            "to plan": "planejar",
+            "to promise": "prometer",
+            "to shake": "tremer",
+            "to aim": "mirar",
+            "to shoot": "atirar",
+            "to wound": "ferir",
+            "trap": "armadilha",
+            "darkness": "escuridão",
+            "flashlight": "lanterna",
+            "weapon": "arma branca",
+            "freedom": "liberdade",
+            "dangerous": "perigoso",
+            "prison": "prisão",
+            "free": "livre"
+          }
+        ]
+      }
+    ]
+  }

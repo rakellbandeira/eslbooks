@@ -1,0 +1,130 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to disappear": "desaparecer",
+            "to announce": "anunciar",
+            "to reward": "recompensar",
+            "to worry": "preocupar-se",
+            "to argue": "discutir",
+            "to harm": "prejudicar",
+            "to escape": "escapar",
+            "king": "rei",
+            "princess": "princesa",
+            "dragon": "dragão",
+            "castle": "castelo",
+            "prisoner": "prisioneiro",
+            "gold": "ouro",
+            "angry": "irritado",
+            "brave": "corajoso"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to save": "salvar",
+            "to rescue": "resgatar",
+            "to stare": "olhar fixamente",
+            "to enter": "entrar",
+            "to deserve": "merecer",
+            "to hug": "abraçar", 
+            "to promise": "prometer",
+            "messenger": "mensageiro",
+            "gate": "portão",
+            "courtyard": "pátio",
+            "guest": "convidado",
+            "enemy": "inimigo",
+            "blue": "azul",
+            "red": "vermelho",
+            "surprised": "surpreso"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to speak": "falar",
+            "to write": "escrever",
+            "to share": "compartilhar",
+            "to respect": "respeitar",
+            "to hunt": "caçar",
+            "to meet": "encontrar",
+            "to draw": "desenhar",
+            "treaty": "tratado",
+            "peace": "paz",
+            "rules": "regras",
+            "maps": "mapas",
+            "territory": "território",
+            "loyal": "leal",
+            "representative": "representante",
+            "ambassador": "embaixador"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to approach": "aproximar-se",
+            "to negotiate": "negociar",
+            "to change": "mudar",
+            "to discuss": "discutir",
+            "to accept": "aceitar",
+            "to recognize": "reconhecer",
+            "to apologize": "desculpar-se",
+            "elders": "anciãos",
+            "council": "conselho",
+            "terms": "termos",
+            "honor": "honra",
+            "forest": "floresta",
+            "mountain": "montanha",
+            "faith": "fé",
+            "permission": "permissão"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to sign": "assinar",
+            "to celebrate": "celebrar",
+            "to work": "trabalhar",
+            "to build": "construir",
+            "to help": "ajudar",
+            "to sing": "cantar",
+            "to teach": "ensinar",
+            "festival": "festival",
+            "ceremony": "cerimônia",
+            "scroll": "pergaminho",
+            "friendship": "amizade",
+            "allies": "aliados",
+            "historic": "histórico",
+            "remarkable": "notável",
+            "possible": "possível"
+          }
+        ]
+      },
+      {
+        "episode6": [
+          {
+            "to attack": "atacar",
+            "to burn": "queimar",
+            "to investigate": "investigar",
+            "to steal": "roubar",
+            "to protect": "proteger",
+            "to arrest": "prender",
+            "to punish": "punir",
+            "eggs": "ovos",
+            "fire": "fogo",
+            "justice": "justiça",
+            "betrayal": "traição",
+            "protector": "protetor",
+            "anniversary": "aniversário",
+            "harmony": "harmonia",
+            "innocent": "inocente"
+          }
+        ]
+      }
+    ]
+  }

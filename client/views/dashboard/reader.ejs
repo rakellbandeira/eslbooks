@@ -22,6 +22,8 @@
       <!-- Changed path here from /book to /dashboard -->
       <a href="/dashboard" class="btn btn-secondary close-btn">Close</a>
     </div>
+
+
   </div>
   
   
@@ -88,12 +90,15 @@
       <a href="/dashboard" class="btn btn-secondary close-btn">Close</a>
     </div>
   </div>
+
+
+    <script src="/js/bookReader.js"></script>
+  
   
 
 </div>
 
 <script>
-// Replace the existing script section in reader.ejs with this code
 
 document.addEventListener('DOMContentLoaded', function() {
   const selectableWords = document.querySelectorAll('.selectable-word');
@@ -107,6 +112,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const wordTranslationInput = document.getElementById('word-translation');
   const wordBankForm = document.getElementById('wordBankForm');
   const cancelAddWord = document.getElementById('cancel-add-word');
+  const isFirstPage = <%= isFirstPageOfEpisode %>;
+  const episodeNumber = <%= currentEpisode %>;
+  const filename = '<%= book.filename %>';
   
   let selectedWord = '';
   let selectedSentence = '';
@@ -383,6 +391,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const bgPath = content.getAttribute('data-background');
     content.style.backgroundImage = `url('${bgPath}')`;
   });
+
+
+    // Show vocabulary popup if it's the first page of an episode
+    if (isFirstPage) {
+      setTimeout(() => {
+        showVocabPopup(filename, episodeNumber);
+      }, 500); // Small delay to ensure page is loaded
+    }
+
+
 });
 </script>
 

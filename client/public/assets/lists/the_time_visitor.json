@@ -1,0 +1,124 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to look": "olhar",
+            "to live": "viver",
+            "to create": "criar",
+            "to travel": "viajar",
+            "to volunteer": "voluntariar-se",
+            "to begin": "começar",
+            "time": "tempo",
+            "scientist": "cientista",
+            "machine": "máquina",
+            "memories": "memórias",
+            "regret": "arrependimento",
+            "alone": "sozinho",
+            "old": "velho",
+            "quiet": "silencioso"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to wake": "acordar",
+            "to work": "funcionar",
+            "to gasp": "ofegar",
+            "to remember": "lembrar",
+            "to choose": "escolher",
+            "to sit": "sentar",
+            "university": "universidade",
+            "library": "biblioteca",
+            "mirror": "espelho",
+            "calendar": "calendário",
+            "young": "jovem",
+            "different": "diferente",
+            "familiar": "familiar",
+            "confused": "confuso"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to spend": "passar",
+            "to drink": "beber",
+            "to love": "amar",
+            "to offer": "oferecer",
+            "to leave": "partir",
+            "to understand": "entender",
+            "coffee shop": "cafeteria",
+            "waitress": "garçonete",
+            "friendship": "amizade",
+            "fear": "medo",
+            "opportunity": "oportunidade",
+            "together": "juntos",
+            "surprised": "surpreso",
+            "happy": "feliz"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to marry": "casar",
+            "to plan": "planejar",
+            "to discover": "descobrir",
+            "to erase": "apagar",
+            "to change": "mudar",
+            "to cry": "chorar",
+            "future": "futuro",
+            "ring": "anel",
+            "engagement": "noivado",
+            "baby": "bebê",
+            "daughter": "filha",
+            "consequences": "consequências",
+            "confused": "confuso",
+            "beautiful": "bonito"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to grow": "crescer",
+            "to succeed": "ter sucesso",
+            "to dream": "sonhar",
+            "to think": "pensar",
+            "to create": "criar",
+            "to build": "construir",
+            "scientist": "cientista",
+            "team": "equipe",
+            "breakthrough": "avanço",
+            "research": "pesquisa",
+            "stars": "estrelas",
+            "birthday": "aniversário",
+            "circles": "círculos",
+            "incredible": "incrível"
+          }
+        ]
+      },
+      {
+        "episode6": [
+          {
+            "to join": "juntar-se",
+            "to contemplate": "contemplar",
+            "to transcend": "transcender",
+            "to kiss": "beijar",
+            "to regret": "arrepender-se",
+            "to choose": "escolhar",
+            "life": "vida",
+            "fate": "destino",
+            "twist": "reviravolta",
+            "choice": "escolha",
+            "laughter": "risos",
+            "silence": "silêncio",
+            "moment": "momento",
+            "balcony": "varanda"
+          }
+        ]
+      }
+    ]
+  }

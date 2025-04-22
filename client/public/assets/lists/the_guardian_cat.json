@@ -1,0 +1,118 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to clean": "limpar",
+            "to find": "encontrar",
+            "to notice": "notar",
+            "to appear": "aparecer",
+            "to change": "mudar",
+            "to touch": "tocar",
+            "funeral": "funeral",
+            "grandmother": "avó",
+            "attic": "sótão",
+            "photos": "fotos",
+            "cat": "gato",
+            "strange": "estranho",
+            "imagination": "imaginação"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to take": "levar",
+            "to decide": "decidir",
+            "to live": "viver",
+            "to search": "pesquisar",
+            "to watch": "observar",
+            "to freeze": "congelar",
+            "alone": "sozinho",
+            "breed": "raça",
+            "markings": "marcas",
+            "pattern": "padrão",
+            "couch": "sofá",
+            "midnight": "meia-noite",
+            "voice": "voz"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to talk": "falar",
+            "to shake": "tremer",
+            "to jump": "pular",
+            "to protect": "proteger",
+            "to feel": "sentir",
+            "to need": "precisar",
+            "ordinary": "comum",
+            "generations": "gerações",
+            "coffee": "café",
+            "brave": "corajoso",
+            "magic": "mágico",
+            "guardian": "guardião",
+            "treasures": "tesouros"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to look": "olhar",
+            "to think": "pensar",
+            "to open": "abrir",
+            "to remember": "lembrar",
+            "to collect": "colecionar",
+            "to explain": "explicar",
+            "missing": "desaparecido",
+            "wooden": "de madeira",
+            "symbols": "símbolos",
+            "key": "chave",
+            "nervous": "nervoso",
+            "special": "especial",
+            "power": "poder"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to visit": "visitar",
+            "to hide": "esconder",
+            "to belong": "pertencer",
+            "to move": "mover",
+            "to whisper": "sussurrar",
+            "to distract": "distrair",
+            "backpack": "mochila",
+            "house": "casa",
+            "plants": "plantas",
+            "friend": "amigo",
+            "shelf": "prateleira",
+            "bathroom": "banheiro",
+            "questions": "perguntas"
+          }
+        ]
+      },
+      {
+        "episode6": [
+          {
+            "to nod": "acenar com a cabeça",
+            "to wait": "esperar",
+            "to understand": "entender",
+            "to read": "ler",
+            "to learn": "aprender",
+            "to laugh": "rir",
+            "address": "endereço",
+            "garden": "jardim",
+            "door": "porta",
+            "room": "quarto/sala",
+            "ancestors": "antepassados",
+            "history": "história",
+            "knowledge": "conhecimento"
+          }
+        ]
+      }
+    ]
+  }

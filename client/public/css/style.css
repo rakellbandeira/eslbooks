@@ -565,67 +565,98 @@
   .selectable-word.selected {
     background-color: #cce5ff;
   }
-/*   
-  .word-popup {
-    position: fixed; 
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    min-width: 200px;
-    max-width: 300px;
-    transform: translateX(-50%); 
-    margin-left: 50%; 
-  }
-  
-  .word-popup-content {
-    padding: 10px;
-  }
-  
-  .translation {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-  }
-  
-  .word-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 8px;
-  }
-  
-  .selectable-word {
-    cursor: pointer;
-    padding: 0 1px;
-  }
-  
-  .selectable-word:hover {
-    background-color: rgba(255, 255, 0, 0.3);
-  }
-  
-  .selectable-word.selected {
-    background-color: rgba(255, 255, 0, 0.5);
-  }
-  
-  .add-word-form {
-    position: absolute;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    z-index: 1000;
-    width: 300px;
-  }
-  
-  .add-word-form h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-  }
-  
-  .close-btn {
-    white-space: nowrap;
-  }
- */
+
+
+/* Vocabulary Popup Styles */
+.vocab-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+
+  display: grid;
+  justify-items: center;
+}
+
+.vocab-popup {
+  position: fixed;
+  z-index: 1000;
+  width: 80%;
+  max-width: 800px;
+  height: 80%;
+  max-height: 600px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  display: grid;
+  /* flex-direction: column; */
+  overflow: hidden;
+  top: 70px;
+  align-self: center;
+}
+
+.vocab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #0066cc;
+  color: white;
+}
+
+.vocab-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.vocab-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.vocab-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.vocab-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.vocab-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  transition: transform 0.2s;
+}
+
+.vocab-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vocab-english {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #0066cc;
+}
+
+.vocab-translation {
+  color: #666;
+  font-style: italic;
+}
+ 
 
  .word-popup {
   position: absolute;
@@ -634,7 +665,7 @@
   border-radius: 4px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  width: 300px; /* Increased width to accommodate longer sentence translations */
+  width: 300px; 
 }
 
 .word-popup-content {

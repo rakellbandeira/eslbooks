@@ -1,0 +1,109 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to learn": "aprender",
+            "to leave": "sair/partir",
+            "to rush": "apressar-se",
+            "to care": "cuidar",
+            "to build": "construir",
+            "to play": "brincar",
+            "to cry": "chorar",
+            "to laugh": "rir",
+            "strong": "forte",
+            "tired": "cansado",
+            "mature": "maduro",
+            "shield": "escudo",
+            "feelings": "sentimentos",
+            "walls": "paredes",
+            "safe": "seguro"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to succeed": "ter sucesso",
+            "to manage": "administrar",
+            "to smile": "sorrir",
+            "to shake": "apertar/balançar",
+            "to worry": "preocupar-se",
+            "to admit": "admitir",
+            "to notice": "notar",
+            "perfect": "perfeito",
+            "exhausted": "exausto",
+            "professional": "profissional",
+            "apartment": "apartamento",
+            "vulnerability": "vulnerabilidade",
+            "weakness": "fraqueza",
+            "reflection": "reflexão",
+            "foreign": "estrangeiro/estranho"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to change": "mudar",
+            "to become": "tornar-se",
+            "to complain": "reclamar",
+            "to watch": "observar",
+            "to focus": "focar",
+            "to check": "verificar",
+            "to suffer": "sofrer",
+            "to control": "controlar",
+            "friends": "amigos",
+            "quality": "qualidade",
+            "confusion": "confusão",
+            "influence": "influência",
+            "emotional": "emocional",
+            "heavy": "pesado",
+            "special": "especial"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to avoid": "evitar",
+            "to miss": "sentir falta",
+            "to hurt": "machucar/doer",
+            "to listen": "escutar",
+            "to doubt": "duvidar",
+            "to interrupt": "interromper",
+            "to lie": "mentir",
+            "empty": "vazio",
+            "alone": "sozinho",
+            "afraid": "com medo",
+            "deadline": "prazo",
+            "strange": "estranho",
+            "confused": "confuso",
+            "steady": "firme",
+            "shaky": "trêmulo"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to grow": "crescer",
+            "to face": "enfrentar",
+            "to doubt": "duvidar",
+            "to fire": "demitir",
+            "to believe": "acreditar",
+            "to struggle": "lutar",
+            "to water": "regar",
+            "calm": "calmo",
+            "brave": "corajoso",
+            "successful": "bem-sucedido",
+            "complaints": "reclamações",
+            "joy": "alegria",
+            "plant": "planta",
+            "beach": "praia",
+            "office": "escritório"
+          }
+        ]
+      }
+    ]
+  }

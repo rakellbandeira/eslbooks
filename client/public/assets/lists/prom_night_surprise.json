@@ -1,0 +1,118 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to look": "olhar",
+            "to read": "ler",
+            "to cry": "chorar",
+            "to sit": "sentar",
+            "to hang": "pendurar",
+            "to buy": "comprar",
+            "to wait": "esperar",
+            "to call": "ligar/chamar",
+            "message": "mensagem",
+            "tears": "lágrimas",
+            "dress": "vestido",
+            "expensive": "caro",
+            "beautiful": "bonito"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to arrive": "chegar",
+            "to walk": "caminhar",
+            "to cancel": "cancelar",
+            "ice cream": "sorvete",
+            "chocolate": "chocolate",
+            "favorite": "favorito",
+            "alone": "sozinho",
+            "date": "encontro",
+            "dance": "dança",
+            "pictures": "fotos",
+            "wrong": "errado",
+            "sorry": "triste/arrependido",
+            "suddenly": "repentinamente"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to ask": "perguntar",
+            "to smile": "sorrir",
+            "to help": "ajudar",
+            "to think": "pensar",
+            "to lose": "perder",
+            "to answer": "responder",
+            "math": "matemática",
+            "class": "aula",
+            "ticket": "ingresso",
+            "shy": "tímido",
+            "homework": "dever de casa",
+            "speaker": "alto-falante",
+            "phone": "telefone"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to sound": "soar",
+            "to continue": "continuar",
+            "to feel": "sentir",
+            "to beat": "bater",
+            "to love": "amar",
+            "to pick up": "buscar",
+            "confused": "confuso",
+            "terrible": "terrível",
+            "nervous": "nervoso",
+            "silence": "silêncio",
+            "heart": "coração",
+            "voice": "voz",
+            "question": "pergunta"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to shine": "brilhar",
+            "to ring": "tocar",
+            "to jump": "pular",
+            "to wear": "vestir",
+            "to match": "combinar",
+            "to give": "dar",
+            "doorbell": "campainha",
+            "suit": "terno",
+            "tie": "gravata",
+            "corsage": "corsage",
+            "wrist": "pulso",
+            "car": "carro",
+            "perfect": "perfeito"
+          }
+        ]
+      },
+      {
+        "episode6": [
+          {
+            "to look": "parecer",
+            "to meet": "encontrar",
+            "to dance": "dançar",
+            "to hold": "segurar",
+            "to move": "mover",
+            "to spin": "girar",
+            "to laugh": "rir",
+            "to forget": "esquecer",
+            "gym": "ginásio",
+            "lights": "luzes",
+            "music": "música",
+            "magical": "mágico",
+            "surprised": "surpreso"
+          }
+        ]
+      }
+    ]
+  }

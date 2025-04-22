@@ -1,0 +1,99 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to walk": "caminhar",
+            "to shine": "brilhar",
+            "to bend": "curvar-se",
+            "to fit": "caber/servir",
+            "to wish": "desejar",
+            "to fall": "cair",
+            "park": "parque",
+            "grass": "grama",
+            "ring": "anel",
+            "silver": "prata",
+            "stone": "pedra",
+            "luck": "sorte",
+            "forecast": "previsão"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to sit": "sentar",
+            "to change": "mudar",
+            "to move": "mover",
+            "to form": "formar",
+            "to test": "testar",
+            "to whisper": "sussurrar",
+            "clouds": "nuvens",
+            "stars": "estrelas",
+            "weather": "clima",
+            "power": "poder",
+            "secret": "segredo",
+            "tiny": "minúsculo",
+            "quiet": "silencioso"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to use": "usar",
+            "to notice": "notar",
+            "to smile": "sorrir",
+            "to complain": "reclamar",
+            "to fix": "consertar",
+            "to affect": "afetar",
+            "friend": "amigo/amiga",
+            "summer": "verão",
+            "wind": "vento",
+            "crops": "colheitas",
+            "patterns": "padrões",
+            "scientists": "cientistas",
+            "worried": "preocupado"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to decide": "decidir",
+            "to dream": "sonhar",
+            "to wake": "acordar",
+            "to pour": "derramar",
+            "to break": "quebrar",
+            "to calm": "acalmar",
+            "to believe": "acreditar",
+            "storm": "tempestade",
+            "floods": "inundações",
+            "branches": "galhos",
+            "scared": "assustado",
+            "worse": "pior",
+            "hurt": "machucar"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to hold": "segurar",
+            "to control": "controlar",
+            "to grow": "crescer",
+            "to point": "apontar",
+            "to touch": "tocar",
+            "to stop": "parar",
+            "to handle": "lidar",
+            "wise": "sábio",
+            "choice": "escolha",
+            "ground": "chão",
+            "sky": "céu",
+            "carefully": "cuidadosamente",
+            "completely": "completamente"
+          }
+        ]
+      }
+    ]
+  }

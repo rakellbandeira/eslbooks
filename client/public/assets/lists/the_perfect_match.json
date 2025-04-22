@@ -1,0 +1,137 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to sit": "sentar",
+            "to work": "trabalhar",
+            "to call": "ligar/chamar",
+            "to need": "precisar",
+            "to agree": "concordar",
+            "to ask": "perguntar",
+            "friend": "amigo/amiga",
+            "project": "projeto",
+            "blind date": "encontro às cegas",
+            "important": "importante",
+            "desk": "escrivaninha",
+            "boring": "chato",
+            "sense": "sentido"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to cancel": "cancelar",
+            "to promise": "prometer",
+            "to look": "procurar/olhar",
+            "to expect": "esperar",
+            "to wait": "aguardar",
+            "to wear": "vestir",
+            "restaurant": "restaurante",
+            "book": "livro",
+            "teacher": "professor",
+            "art": "arte",
+            "children": "crianças",
+            "kind": "gentil",
+            "warm": "caloroso"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to forget": "esquecer",
+            "to tell": "contar",
+            "to start": "começar",
+            "to sound": "soar",
+            "to pay": "pagar",
+            "to enjoy": "apreciar",
+            "dinner": "jantar",
+            "stories": "histórias",
+            "face": "rosto",
+            "soul": "alma",
+            "bills": "contas",
+            "money": "dinheiro",
+            "successful": "bem-sucedido"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to find": "encontrar",
+            "to think": "pensar",
+            "to show": "mostrar",
+            "to paint": "pintar",
+            "to try": "tentar",
+            "to feel": "sentir",
+            "museum": "museu",
+            "classroom": "sala de aula",
+            "paper": "papel",
+            "paints": "tintas",
+            "sunset": "pôr do sol",
+            "creative": "criativo",
+            "nervous": "nervoso"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to call": "chamar",
+            "to lead": "liderar",
+            "to move": "mudar-se",
+            "to know": "saber/conhecer",
+            "to like": "gostar",
+            "to admit": "admitir",
+            "boss": "chefe",
+            "office": "escritório",
+            "promotion": "promoção",
+            "responsibility": "responsabilidade",
+            "opportunity": "oportunidade",
+            "confused": "confuso",
+            "immediately": "imediatamente"
+          }
+        ]
+      },
+      {
+        "episode6": [
+          {
+            "to meet": "encontrar-se",
+            "to decide": "decidir",
+            "to fade": "desaparecer",
+            "to care": "importar-se",
+            "to search": "procurar",
+            "to make": "fazer",
+            "to sleep": "dormir",
+            "choice": "escolha",
+            "question": "pergunta",
+            "career": "carreira",
+            "respect": "respeito",
+            "different": "diferente",
+            "slowly": "lentamente"
+          }
+        ]
+      },
+      {
+        "episode7": [
+          {
+            "to finish": "terminar",
+            "to close": "fechar",
+            "to leave": "sair",
+            "to bring": "trazer",
+            "to cook": "cozinhar",
+            "to remember": "lembrar",
+            "to watch": "observar",
+            "balance": "equilíbrio",
+            "dessert": "sobremesa",
+            "recipe": "receita",
+            "happiness": "felicidade",
+            "connection": "conexão",
+            "patient": "paciente"
+          }
+        ]
+      }
+    ]
+  }

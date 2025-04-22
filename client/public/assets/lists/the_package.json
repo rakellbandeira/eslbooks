@@ -1,0 +1,104 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to find": "encontrar",
+            "to forget": "esquecer",
+            "to wrap": "embrulhar",
+            "to pick up": "pegar",
+            "to read": "ler",
+            "to press": "pressionar",
+            "train": "trem",
+            "package": "pacote",
+            "watch": "relógio",
+            "note": "bilhete",
+            "string": "barbante",
+            "stranger": "estranho/desconhecido",
+            "valuable": "valioso",
+            "curious": "curioso"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to meet": "encontrar/conhecer",
+            "to sit": "sentar",
+            "to explain": "explicar",
+            "to belong": "pertencer",
+            "to turn": "virar/girar",
+            "to describe": "descrever",
+            "cafe": "café",
+            "grandfather": "avô",
+            "friend": "amigo",
+            "clue": "pista",
+            "envelope": "envelope",
+            "mysterious": "misterioso",
+            "prized": "estimado",
+            "remarkable": "notável"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to stare": "olhar fixamente",
+            "to discover": "descobrir",
+            "to die": "morrer",
+            "to disappear": "desaparecer",
+            "to hunt": "caçar",
+            "to reveal": "revelar",
+            "to continue": "continuar",
+            "legacy": "legado",
+            "secret": "segredo",
+            "photograph": "fotografia",
+            "memory": "memória",
+            "message": "mensagem",
+            "difficult": "difícil",
+            "blue": "azul"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to visit": "visitar",
+            "to think": "pensar",
+            "to show": "mostrar",
+            "to hide": "esconder",
+            "to realize": "perceber",
+            "to follow": "seguir",
+            "to remember": "lembrar",
+            "house": "casa",
+            "garden": "jardim",
+            "stone": "pedra",
+            "box": "caixa",
+            "path": "caminho",
+            "pattern": "padrão",
+            "suddenly": "repentinamente"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to lift": "levantar",
+            "to move": "mover",
+            "to touch": "tocar",
+            "to look": "olhar",
+            "to run": "correr",
+            "to wait": "esperar",
+            "to protect": "proteger",
+            "hole": "buraco",
+            "notebook": "caderno",
+            "key": "chave",
+            "leather": "couro",
+            "code": "código",
+            "address": "endereço",
+            "quiet": "quieto"
+          }
+        ]
+      }
+    ]
+  }

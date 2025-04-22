@@ -1,0 +1,144 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "winter": "inverno",
+            "snow": "neve",
+            "ice": "gelo",
+            "cold": "frio",
+            "hungry": "faminto",
+            "prince": "príncipe",
+            "castle": "castelo",
+            "to watch": "observar",
+            "to fall": "cair",
+            "kingdom": "reino",
+            "king": "rei",
+            "throne": "trono",
+            "danger": "perigo",
+            "to breathe": "respirar"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "story": "história",
+            "fire": "fogo",
+            "warm": "quente",
+            "year": "ano",
+            "great-grandfather": "bisavô",
+            "to keep": "manter",
+            "to grow": "crescer",
+            "to teach": "ensinar",
+            "to die": "morrer",
+            "to fail": "falhar",
+            "sad": "triste",
+            "mountains": "montanhas",
+            "dragon": "dragão",
+            "alive": "vivo"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to pack": "empacotar",
+            "bag": "bolsa",
+            "clothes": "roupas",
+            "coat": "casaco",
+            "boots": "botas",
+            "to promise": "prometer",
+            "deep": "profundo",
+            "wind": "vento",
+            "cave": "caverna",
+            "smoke": "fumaça",
+            "to climb": "escalar",
+            "huge": "enorme",
+            "gold": "ouro",
+            "yellow": "amarelo"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to nod": "acenar",
+            "to understand": "entender",
+            "heart": "coração",
+            "chest": "peito",
+            "to close": "fechar",
+            "eyes": "olhos",
+            "to think": "pensar",
+            "happy": "feliz",
+            "to feel": "sentir",
+            "smile": "sorriso",
+            "laugh": "risada",
+            "good": "bom",
+            "to move": "mover",
+            "mouth": "boca"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to practice": "praticar",
+            "to instruct": "instruir",
+            "hard": "forte/difícil",
+            "nothing": "nada",
+            "night": "noite",
+            "different": "diferente",
+            "to care": "importar-se",
+            "deeply": "profundamente",
+            "children": "crianças",
+            "throat": "garganta",
+            "hot": "quente",
+            "flame": "chama",
+            "second": "segundo",
+            "to shout": "gritar"
+          }
+        ]
+      },
+      {
+        "episode6": [
+          {
+            "stronger": "mais forte",
+            "ready": "pronto",
+            "test": "teste",
+            "to light": "acender",
+            "highest": "mais alto",
+            "tower": "torre",
+            "to burn": "queimar",
+            "to explain": "explicar",
+            "to make": "fazer",
+            "hotter": "mais quente",
+            "journey": "jornada",
+            "home": "casa",
+            "inside": "dentro",
+            "finally": "finalmente"
+          }
+        ]
+      },
+      {
+        "episode7": [
+          {
+            "to arrive": "chegar",
+            "to hug": "abraçar",
+            "to look": "parecer",
+            "to cry": "chorar",
+            "steps": "degraus",
+            "bowl": "tigela",
+            "stone": "pedra",
+            "wood": "madeira",
+            "oil": "óleo",
+            "to push": "empurrar",
+            "to shoot": "disparar",
+            "to melt": "derreter",
+            "to crack": "rachar",
+            "spring": "primavera"
+          }
+        ]
+      }
+    ]
+  }

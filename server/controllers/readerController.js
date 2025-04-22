@@ -64,42 +64,40 @@ exports.getBookReader = async (req, res, next) => {
     const nextPage = getNextPageInfo(book, episodeNum, pageNum);
     const prevPage = getPrevPageInfo(book, episodeNum, pageNum);
     
-   // In server/controllers/readerController.js, in the getBookReader function:
-
     // Update user progress
     try {
-        const existingProgress = await UserProgress.findOne({ 
-            userId: req.user._id, 
-            bookFilename: filename 
-          });
-          console.log('Existing progress:', existingProgress);
+      const existingProgress = await UserProgress.findOne({ 
+        userId: req.user._id, 
+        bookFilename: filename 
+      });
+      console.log('Existing progress:', existingProgress);
 
-        await UserProgress.findOneAndUpdate(
+      await UserProgress.findOneAndUpdate(
         { 
-            userId: req.user._id, 
-            bookFilename: filename 
+          userId: req.user._id, 
+          bookFilename: filename 
         },
         {
-            currentEpisode: episodeNum,
-            currentPage: pageNum,
-            totalPages: totalPagesInBook,
-            percentComplete,
-            lastRead: new Date()
+          currentEpisode: episodeNum,
+          currentPage: pageNum,
+          totalPages: totalPagesInBook,
+          percentComplete,
+          lastRead: new Date()
         },
         { 
-            upsert: true, 
-            new: true,
-            runValidators: true 
+          upsert: true, 
+          new: true,
+          runValidators: true 
         }
-        );
+      );
     } catch (error) {
-        console.error('Progress update error:', error);
-        // Continue even if progress update fails
-        // This prevents the reading experience from being interrupted
+      console.error('Progress update error:', error);
+      // Continue even if progress update fails
+      // This prevents the reading experience from being interrupted
     }
     
     // Create text with spans for each paragraph
-      const textWithSpans = Object.entries(pageContent)
+    const textWithSpans = Object.entries(pageContent)
       .sort(([keyA], [keyB]) => {
         // Sort by paragraph number
         const numA = parseInt(keyA.replace('paragraph', ''));
@@ -124,9 +122,6 @@ exports.getBookReader = async (req, res, next) => {
             .join('')
         }</p>`;
       }).join('');
-
-
-
     
     // Set path to the common background image
     const backgroundImagePath = '/images/book-background.jpg';
@@ -148,6 +143,7 @@ exports.getBookReader = async (req, res, next) => {
       prevPage,
       textWithSpans,
       backgroundImagePath,
+      isFirstPageOfEpisode: pageNum === 1, // Add this for the vocabulary popup
       user: req.user
     });
   } catch (error) {

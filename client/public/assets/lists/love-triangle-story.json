@@ -1,0 +1,108 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to sigh": "suspirar",
+            "to wear": "vestir",
+            "to teach": "ensinar",
+            "to become": "tornar-se",
+            "to decide": "decidir",
+            "to admit": "admitir",
+            "closet": "armário",
+            "dress": "vestido",
+            "friend": "amigo/amiga",
+            "architect": "arquiteto",
+            "childhood": "infância",
+            "successful": "bem-sucedido", 
+            "important": "importante",
+            "excited": "animado/animada",
+            "perfect": "perfeito"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to remember": "lembrar",
+            "to wake": "acordar",
+            "to smile": "sorrir",
+            "to talk": "conversar",
+            "to walk": "caminhar",
+            "to show": "mostrar",
+            "to call": "ligar/chamar",
+            "coffee": "café",
+            "morning": "manhã",
+            "building": "prédio",
+            "lunch": "almoço",
+            "river": "rio",
+            "design": "design/desenho",
+            "shopping": "compras",
+            "worried": "preocupado"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to spend": "passar",
+            "to fall": "cair",
+            "to listen": "escutar",
+            "to avoid": "evitar",
+            "to attend": "comparecer",
+            "to kiss": "beijar",
+            "to invite": "convidar",
+            "charity": "caridade",
+            "event": "evento",
+            "hospital": "hospital",
+            "apron": "avental",
+            "staff": "equipe",
+            "relationship": "relacionamento",
+            "strange": "estranho"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to drive": "dirigir",
+            "to face": "enfrentar",
+            "to sort": "organizar",
+            "to decline": "recusar",
+            "to break": "quebrar",
+            "to grow": "crescer",
+            "to ignore": "ignorar",
+            "to explain": "explicar",
+            "lake": "lago",
+            "bench": "banco",
+            "park": "parque",
+            "promises": "promessas",
+            "complicated": "complicado",
+            "painful": "doloroso",
+            "cruel": "cruel"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to wait": "esperar",
+            "to know": "saber/conhecer",
+            "to heal": "curar",
+            "to trust": "confiar",
+            "to deny": "negar",
+            "to change": "mudar",
+            "to love": "amar",
+            "to marry": "casar",
+            "community": "comunidade",
+            "studio": "estúdio",
+            "gallery": "galeria",
+            "magazine": "revista",
+            "bond": "laço/vínculo", 
+            "path": "caminho",
+            "home": "lar"
+          }
+        ]
+      }
+    ]
+  }

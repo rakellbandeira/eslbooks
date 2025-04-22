@@ -110,13 +110,61 @@ function getBookPage(book, episodeNumber, pageNumber) {
       content: page[0],
       episodeTitle: book.episodeTitles[0][episodeKey],
       pageNumber,
-      episodeNumber
+      episodeNumber,
+      isFirstPageOfEpisode: pageNumber === 1 // is this the first page?
     };
   } catch (error) {
     console.error('Error getting book page:', error);
     return null;
   }
 }
+
+
+exports.readBook = async (req, res, next) => {
+  try {
+    const { filename } = req.params;
+    let episodeNumber = parseInt(req.query.episode) || 1;
+    let pageNumber = parseInt(req.query.page) || 1;
+    
+    // Load the book data
+    const book = await loadBookByFilename(filename);
+    if (!book) {
+      req.flash('error', 'Book not found');
+      return res.redirect('/dashboard');
+    }
+    
+    // Get the page data
+    const page = getBookPage(book, episodeNumber, pageNumber);
+    if (!page) {
+      req.flash('error', 'Page not found');
+      return res.redirect('/dashboard');
+    }
+    
+    // Get navigation
+    const nextPage = getNextPageInfo(book, episodeNumber, pageNumber);
+    const prevPage = getPrevPageInfo(book, episodeNumber, pageNumber);
+    
+    // Track reading progress
+    await updateUserProgress(req.user._id, filename, book, episodeNumber, pageNumber);
+    
+    // Render the page
+    res.render('books/reader', {
+      title: book.title,
+      book,
+      page,
+      nextPage,
+      prevPage,
+      isFirstPageOfEpisode: pageNumber === 1, // Pass flag to template
+      filename,
+      user: req.user
+    });
+    
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 
 // Get next page information
 function getNextPageInfo(book, currentEpisode, currentPage) {
@@ -231,3 +279,5 @@ exports.getAllBooksWithFilters = async (req, res, next) => {
     next(error);
   }
 };
+
+

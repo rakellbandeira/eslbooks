@@ -1,0 +1,99 @@
+{
+    "episodes": [
+      {
+        "episode1": [
+          {
+            "to live": "morar",
+            "to run": "correr",
+            "to jump": "pular",
+            "to cry": "chorar",
+            "to grow": "crescer",
+            "to learn": "aprender",
+            "mom": "mamãe",
+            "dad": "papai",
+            "little": "pequena",
+            "safe": "segura",
+            "new": "nova",
+            "sad": "triste",
+            "years": "anos",
+            "hugs": "abraços"
+          }
+        ]
+      },
+      {
+        "episode2": [
+          {
+            "to be": "ser/estar",
+            "to want": "querer",
+            "to think": "pensar",
+            "to say": "dizer", 
+            "to like": "gostar",
+            "to walk": "andar",
+            "to feel": "sentir",
+            "school": "escola",
+            "dress": "vestido",
+            "girl": "menina",
+            "bad": "ruim/mau",
+            "strong": "forte",
+            "away": "embora",
+            "brave": "corajosa"
+          }
+        ]
+      },
+      {
+        "episode3": [
+          {
+            "to have": "ter",
+            "to call": "ligar/chamar",
+            "to move": "mover",
+            "to keep": "manter",
+            "husband": "marido",
+            "baby": "bebê",
+            "soon": "logo",
+            "happy": "feliz",
+            "scared": "assustada",
+            "big": "grande",
+            "Tom": "Tom",
+            "help": "ajudar",
+            "try": "tentar"
+          }
+        ]
+      },
+      {
+        "episode4": [
+          {
+            "to ask": "perguntar",
+            "to worry": "preocupar-se",
+            "to get hurt": "machucar-se",
+            "to smile": "sorrir",
+            "to see": "ver",
+            "to need": "precisar",
+            "to love": "amar",
+            "tired": "cansada",
+            "doctor": "médico",
+            "name": "nome",
+            "Lily": "Lily",
+            "good": "bom/boa"
+          }
+        ]
+      },
+      {
+        "episode5": [
+          {
+            "to climb": "escalar",
+            "to fall": "cair",
+            "to catch": "pegar",
+            "to stand": "ficar em pé",
+            "to visit": "visitar",
+            "tree": "árvore",
+            "again": "novamente",
+            "three": "três",
+            "now": "agora",
+            "near": "perto",
+            "more": "mais",
+            "smile": "sorriso"
+          }
+        ]
+      }
+    ]
+  }
