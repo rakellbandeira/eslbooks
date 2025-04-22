@@ -872,7 +872,7 @@
 
     .dashboard-actions, .admin-actions {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       gap: 15px;
       margin-bottom: 30px;
     }
