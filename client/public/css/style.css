@@ -112,13 +112,13 @@
   
   .main-nav a {
     text-decoration: none;
-    color: var(--color-text-light);
+    color: var(--color-primary-dark);
     font-weight: 500;
     transition: color 0.3s;
   }
   
-  .main-nav a:hover {
-    color: var(--color-background-light);
+  .main-nav ul li:hover {
+    background-color: var(--color-gray);
   }
   
   /* Footer */
