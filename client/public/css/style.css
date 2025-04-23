@@ -1019,6 +1019,19 @@
    gap: 20px;
   }
 
+  .hero-section {
+    background: linear-gradient(135deg, var(--color-background), var(--color-background-light));
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+  
+  .selectable-word:hover {
+    background-color: var(--color-background-light);
+    border-radius: 3px;
+  }
+
 
   
   /* Responsive adjustments*/
