@@ -1,14 +1,14 @@
 <%- include('../partials/header') %>
 
-<div class="container">
+<div class="container editWordContainer">
   <h1>Edit Word</h1>
   
   <%- include('../partials/messages') %>
   
   <div class="row">
     <div class="col-md-6 offset-md-3">
-      <div class="card">
-        <div class="card-body">
+      <div class="card editWordCard">
+        <div class="card-body editWordCardBody">
           <form action="/word-bank/edit/<%= wordBank._id %>" method="POST">
             <div class="form-group">
               <label for="word">Word</label>

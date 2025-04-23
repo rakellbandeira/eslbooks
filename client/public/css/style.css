@@ -1015,6 +1015,17 @@
 
   }
 
+  .editWordCard{
+    grid-template-rows: 1fr;
+  }
+
+  .editWordCardBody{
+    width: 100%;
+  }
+
+  .editWordContainer{
+    padding-top: 70px;
+  }
 
 
   .hamburger {
