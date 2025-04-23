@@ -59,10 +59,11 @@
     width: 100%;
     max-width: 1200px;
     margin: 10px auto;
-    padding: 0 15px;
+    padding: 120px 15px 0px;
     flex: 1; 
     position: relative;
     z-index: 2;
+    
     
   }
 
@@ -112,14 +113,13 @@
   
   .main-nav a {
     text-decoration: none;
-    color: var(--color-primary-dark);
+    color: var(--color-text-light);
     font-weight: 500;
     transition: color 0.3s;
+    cursor: pointer;
   }
   
-  .main-nav ul li:hover {
-    background-color: var(--color-gray);
-  }
+
   
   /* Footer */
   .main-footer {
@@ -611,7 +611,7 @@
     margin: 70px auto 0px;
     padding: 20px;
     position: relative;
-    background-color: rgb(255, 247, 234);
+    background-color:white;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     overflow: hidden;
@@ -655,12 +655,12 @@
     font-size: 18px;
     line-height: 1.6;
     margin-bottom: 40px;
-    background-color: rgba(255, 255, 255, 0.85);
+    
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.256);
     margin: 20px;
     padding: 30px;
-    background-color: var(--color-white);
+    background-color: rgb(255, 247, 234);
   }
   
   .selectable-word {
@@ -939,8 +939,8 @@
   }
   
   .letter-heading {
-    background-color: #0066cc;
-    color: #fff;
+    background-color: var(--color-background-light);
+    color: var(--color-text-secondary);
     padding: 6px 15px;
     border-radius: 4px;
     margin-bottom: 15px;
