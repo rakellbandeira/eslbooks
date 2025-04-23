@@ -67,5 +67,24 @@ router.post('/api/word-bank', authenticate, async (req, res) => {
       });
     }
   });
+
+  router.delete('/api/reading-progress/:bookFilename', authenticate, async (req, res) => {
+    try {
+      const { bookFilename } = req.params;
+      
+      // Delete the reading progress
+      await UserProgress.findOneAndDelete({
+        userId: req.user._id,
+        bookFilename
+      });
+      
+      res.json({ success: true, message: 'Reading progress deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting reading progress:', error);
+      res.status(500).json({ success: false, message: 'Error deleting reading progress' });
+    }
+  });
+
+
   
   module.exports = router;

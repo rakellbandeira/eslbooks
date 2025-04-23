@@ -47,9 +47,26 @@
         <% books.forEach(book => { %>
           <div class="col-md-4 mb-4">
             <div class="card">
+
+              <div class="book-options">
+                <button class="book-options-btn" onclick="toggleOptionsMenu(event, '<%= book.filename %>')">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <circle cx="8" cy="2" r="1.5" />
+                    <circle cx="8" cy="8" r="1.5" />
+                    <circle cx="8" cy="14" r="1.5" />
+                  </svg>
+                </button>
+                <div class="book-options-menu" id="options-<%= book.filename %>">
+                  <div class="book-options-item delete" onclick="confirmDeleteProgress('<%= book.filename %>', '<%= book.title %>')">
+                    Delete Book Progress
+                  </div>
+                </div>
+              </div>
+
               <img src="<%= book.coverImage %>" class="card-img-top" alt="<%= book.title %>">
               <div class="card-body">
                 <h5 class="card-title"><%= book.title %></h5>
+
                 <div class="progress mb-3">
                   <div class="progress-bar" role="progressbar" style="width:<%= book.percentComplete %>%" aria-valuenow="<%= book.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(book.percentComplete) %>%</div>
                 </div>
@@ -67,4 +84,91 @@
   </div>
 </div>
 
+<div class="confirm-modal" id="deleteProgressModal">
+  <div class="confirm-modal-content">
+    <div class="confirm-modal-title">Delete Reading Progress</div>
+    <div class="confirm-modal-text">
+      Are you sure you want to delete your reading progress for <span id="deleteBookTitle"></span>? This action cannot be undone.
+    </div>
+    <div class="confirm-modal-buttons">
+      <button class="btn btn-cancel" onclick="closeDeleteProgressModal()">Cancel</button>
+      <button class="btn btn-delete" id="confirmDeleteBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
 <%- include('../partials/footer') %>
+
+<script>
+  // Toggle options menu
+  function toggleOptionsMenu(event, bookFilename) {
+    event.stopPropagation();
+    
+    // Close all other open menus
+    document.querySelectorAll('.book-options-menu.show').forEach(menu => {
+      if (menu.id !== `options-${bookFilename}`) {
+        menu.classList.remove('show');
+      }
+    });
+    
+    // Toggle current menu
+    const menu = document.getElementById(`options-${bookFilename}`);
+    menu.classList.toggle('show');
+  }
+  
+  // Close menus when clicking outside
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.book-options-menu.show').forEach(menu => {
+      menu.classList.remove('show');
+    });
+  });
+  
+  // Show delete confirmation modal
+  function confirmDeleteProgress(bookFilename, bookTitle) {
+    // Set book title in modal
+    document.getElementById('deleteBookTitle').textContent = bookTitle;
+    
+    // Set click handler for delete button
+    const deleteBtn = document.getElementById('confirmDeleteBtn');
+    deleteBtn.onclick = function() {
+      deleteBookProgress(bookFilename);
+    };
+    
+    // Show modal
+    document.getElementById('deleteProgressModal').classList.add('show');
+  }
+  
+  // Close delete confirmation modal
+  function closeDeleteProgressModal() {
+    document.getElementById('deleteProgressModal').classList.remove('show');
+  }
+  
+  // Delete book progress
+  async function deleteBookProgress(bookFilename) {
+    try {
+      const response = await fetch(`/api/reading-progress/${bookFilename}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Close modal
+        closeDeleteProgressModal();
+        
+        // Refresh page to update book list
+        window.location.reload();
+      } else {
+        alert('Error deleting reading progress. Please try again.');
+        closeDeleteProgressModal();
+      }
+    } catch (error) {
+      console.error('Error deleting reading progress:', error);
+      alert('Error deleting reading progress. Please try again.');
+      closeDeleteProgressModal();
+    }
+  }
+</script>
