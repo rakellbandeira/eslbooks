@@ -209,6 +209,10 @@
     margin: 0px auto;
   }
 
+  /* .btnHome{
+    opacity: 0.8;
+  } */
+
   
   /* Alerts */
   .alert {
@@ -247,7 +251,8 @@
   }
   
   .hero h1 {
-    font-size: 48px;
+    font-size: 3rem;
+    line-height: 4rem;
     margin-bottom: 20px;
     color: #333;
   }
@@ -255,7 +260,7 @@
   .hero p {
     font-size: 20px;
     margin-bottom: 30px;
-    color: #6c757d;
+    color: var(--color-text-secondary);
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
