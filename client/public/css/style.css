@@ -67,6 +67,20 @@
     
   }
 
+  #containerHeader{
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px auto;
+    
+    justify-content: space-between;
+    padding: 0;
+    align-items: center;
+    flex: 1; 
+    position: relative;
+    z-index: 2;
+  }
+
+
   .container h1{
     margin: 20px;
   }
@@ -1043,6 +1057,10 @@
   
 
   @media (max-width: 768px) {
+
+    #containerHeader{
+      padding: 0px 30px;
+    }
 
     .hero{
       height: 360px;
