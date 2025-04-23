@@ -588,6 +588,7 @@
   .progress-bar {
     background-color: var(--color-secondary);
     border-radius: 5px;
+    padding-left: 10px;
   }
 
 
