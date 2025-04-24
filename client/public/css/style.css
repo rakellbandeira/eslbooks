@@ -444,6 +444,16 @@
   }
 
 
+  .titleIcon{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+  }
+
+  .titleIcon h3{
+    align-self: center;
+  }
+
 #bookRow{
   display: grid;
   grid-template-columns: 1fr 2fr;

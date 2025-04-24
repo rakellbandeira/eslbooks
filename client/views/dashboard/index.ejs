@@ -7,7 +7,11 @@
   
   <div class="dashboard-stats">
     <div class="stat-card">
-      <h3>Reading Progress</h3>
+      <div class="titleIcon">
+        <img src="/images/book-pile.png" alt="book pile" loading="lazy" width="75">
+        <h3>Reading Progress</h3>
+      </div>
+      
       <% if (currentBook) { %>
         <div class="current-book">
           <div class="book-info">
@@ -15,7 +19,6 @@
             <div class="progress mb-2">
               <div class="progress-bar" role="progressbar" style="width:<%= currentBook.percentComplete %>%" aria-valuenow="<%= currentBook.percentComplete %>" aria-valuemin="0" aria-valuemax="100"><%= Math.round(currentBook.percentComplete) %>%</div>
             </div>
-            <p>Page <%= currentBook.currentPage %> of <%= currentBook.totalPages %></p>
             <a href="/book/read/<%= currentBook.filename %>?episode=<%= currentBook.currentEpisode %>&page=<%= currentBook.currentPage %>" class="btn btn-primary">Continue Reading</a>          </div>
         </div>
       <% } else { %>
@@ -25,7 +28,10 @@
     </div>
     
     <div class="stat-card">
-      <h3>Word Bank</h3>
+      <div class="titleIcon">
+        <img src="/images/balloons.png" alt="ballons" loading="lazy" width="75">
+        <h3>Word Bank</h3>
+      </div>
       <% if (wordCount > 0) { %>
         <p>You have saved <strong><%= wordCount %></strong> words to your personal word bank.</p>
         <a href="/word-bank" class="btn btn-primary">View Word Bank</a>
