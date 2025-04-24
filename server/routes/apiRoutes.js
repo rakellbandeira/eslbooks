@@ -3,6 +3,7 @@ const router = express.Router();
 const { translateText } = require('../utils/translate');
 const WordBank = require('../models/WordBank');
 const authenticate = require('../middleware/authentication');
+const UserProgress = require('../models/UserProgress');
 
 // Translate text
 router.post('/api/translate', authenticate, async (req, res) => {
