@@ -1,12 +1,39 @@
 <%- include('../partials/header') %>
 
-<div class="container">
+<div class="container containerInner">
   <h1>Browse Books</h1>
   
   <%- include('../partials/messages') %>
   
   <div class="dashboard-actions">
     <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+  </div>
+
+  <div class="filter-controls">
+    <div class="row" id="filters">
+      <div class="filter">
+        <label for="genre-filter">Filter by Genre:</label>
+        <select id="genre-filter" class="form-control">
+          <option value="">All Genres</option>
+          <% genres.forEach(genre => { %>
+            <option value="<%= genre %>"><%= genre %></option>
+          <% }); %>
+        </select>
+      </div>
+      <div class="filter">
+        <label for="level-filter">Filter by Level:</label>
+        <select id="level-filter" class="form-control">
+          <option value="">All Levels</option>
+          <option value="Early Beginner">Early Beginner</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Intermediate">Intermediate</option>
+          <option value="Advanced">Advanced</option>
+        </select>
+      </div>
+      <div class="filter">
+        <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+      </div>
+    </div>
   </div>
   
   <div class="book-list">
@@ -63,6 +90,46 @@
         content.style.backgroundImage = `url('${bgPath}')`;
       });
     });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
+    const genreFilter = document.getElementById('genre-filter');
+    const levelFilter = document.getElementById('level-filter');
+    const applyButton = document.getElementById('apply-filters');
+    const booksContainer = document.getElementById('books-container');
+    const bookRows = document.querySelectorAll('.book-row');
+    
+    // Apply filters function
+    function applyFilters() {
+      const selectedGenre = genreFilter.value.toLowerCase();
+      const selectedLevel = levelFilter.value.toLowerCase();
+      
+      bookRows.forEach(book => {
+        const bookGenre = book.getAttribute('data-genre');
+        const bookLevel = book.getAttribute('data-level');
+        
+        // Check if book matches both filters
+        const genreMatch = !selectedGenre || bookGenre.includes(selectedGenre);
+        const levelMatch = !selectedLevel || bookLevel === selectedLevel;
+        
+        if (genreMatch && levelMatch) {
+          book.style.display = 'block';
+        } else {
+          book.style.display = 'none';
+        }
+      });
+    }
+    
+    // Event listeners
+    applyButton.addEventListener('click', applyFilters);
+  });
+
+
+    
     </script>
 
 <%- include('../partials/footer') %>
+
+
+  

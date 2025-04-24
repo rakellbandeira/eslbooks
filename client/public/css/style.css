@@ -439,6 +439,10 @@
     color: #333;
   }
 
+  .text-muted {
+    color: white;
+  }
+
 
 #bookRow{
   display: grid;
