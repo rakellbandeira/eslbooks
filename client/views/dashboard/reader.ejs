@@ -217,15 +217,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const paragraph = this.closest('p');
     selectedSentence = getSentenceFromParagraph(paragraph, this);
     
-    // Position popup at click position
-    positionPopupAtClick(wordPopup);
-    
+        
     // Show loading state
     translation.textContent = 'Translating word...';
     sentenceTranslation.textContent = 'Translating sentence...';
     translation.style.display = 'block';
     sentenceTranslation.style.display = 'block';
     wordPopup.style.display = 'block';
+
+    wordPopup.style.display = 'block';
+
+    // Position popup at click position
+    positionPopupAtClick(wordPopup);
     
     // Fetch translations
     fetchTranslation(selectedWord, 'word');
@@ -235,21 +238,45 @@ document.addEventListener('DOMContentLoaded', function() {
   // Position popup at the last click position
   function positionPopupAtClick(popup) {
     // Get available space
-    const windowWidth = window.innerWidth;
-    const popupWidth = 200; // Width from CSS
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const popupWidth = popup.offsetWidth || 300; 
     
-    // Calculate position (centered on click point)
-    let leftPos = lastClickPosition.x - (popupWidth / 2);
-    
-    // Ensure popup doesn't go off-screen
-    if (leftPos < 10) leftPos = 10;
-    if (leftPos + popupWidth > windowWidth - 10) {
-      leftPos = windowWidth - popupWidth - 10;
+    if (viewportWidth < 769) {
+      let topPos = lastClickPosition.y - 50 ;
+      let leftPos = lastClickPosition.x - (popupWidth / 2);
+
+      if (leftPos < 10) leftPos = 10;
+      if (leftPos + popupWidth > viewportWidth - 10) {
+        leftPos = viewportWidth - popupWidth - 10;
+      }
+
+      popup.style.left = leftPos + 'px';
+      popup.style.top = topPos + 'px';
+
+    } else {
+
+      // Position to the left of the clicked word instead
+      let leftPos = lastClickPosition.x -350;
+       
+      if (leftPos + popupWidth > viewportWidth - 20) {
+        leftPos = lastClickPosition.x - popupWidth - 10;
+
+        // If still off-screen on the left, center it below the word
+        if (leftPos < 10) {
+        leftPos = Math.max(10, lastClickPosition.x - (popupWidth / 2));
+        popup.style.top = (lastClickPosition.y + 25) + 'px';
+        } else {
+          // Align top with the clicked position
+          popup.style.top = (lastClickPosition.y - 10) + 'px';
+        }
+      } else {
+        // Regular positioning to the right, align top with clicked position
+        popup.style.top = (lastClickPosition.y - 50) + 'px';
+      }
+
+      // Apply horizontal position
+      popup.style.left = leftPos + 'px';
     }
-    
-    // Apply position
-    popup.style.left = leftPos + 'px';
-    popup.style.top = (lastClickPosition.y - 47) + 'px'; // 25px below click
   }
   
   // Fetch translation
@@ -316,14 +343,16 @@ document.addEventListener('DOMContentLoaded', function() {
     wordPopup.style.display = 'none';
     
     // Position form at the same position as the popup
-    addWordForm.style.left = wordPopup.style.left;
-    addWordForm.style.top = wordPopup.style.top;
+    /* addWordForm.style.left = wordPopup.style.left;
+    addWordForm.style.top = wordPopup.style.top; */
     
     // Set the word in the form
     wordInput.value = selectedWord;
     
     // Show the form
     addWordForm.style.display = 'block';
+
+    positionPopupAtClick(addWordForm);
   });
   
   // Close popup button
