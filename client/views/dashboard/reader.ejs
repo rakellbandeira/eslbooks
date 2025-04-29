@@ -36,8 +36,22 @@
   
   <div id="word-popup" class="word-popup" style="display: none;">
     <div class="word-popup-content">
-      <div id="translation" class="translation"></div>
-      <div id="sentence-translation" class="sentence-translation"></div>
+      <div class="word-container">
+        <div class="word-audio">
+          <button id="speak-word-btn" class="btn btn-sm btn-light"><i class="fas fa-volume-up"></i></button>
+        </div>
+        <div id="translation" class="translation"></div>
+        
+      </div>
+      
+      <div class="word-container">
+        <div class="sentence-audio">
+          <button id="speak-sentence-btn" class="btn btn-sm btn-light"><i class="fas fa-volume-up"></i></button>
+        </div>
+        <div id="sentence-translation" class="sentence-translation"></div>
+        
+      </div>
+      
       <div class="word-actions">
         <button id="add-to-bank-btn" class="btn btn-sm btn-secondary">Add to Word Bank</button>
         <button id="close-popup-btn" class="btn btn-sm btn-light">Close</button>
@@ -115,6 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const isFirstPage = <%= isFirstPageOfEpisode %>;
   const episodeNumber = <%= currentEpisode %>;
   const filename = '<%= book.filename %>';
+  const speakWordBtn = document.getElementById('speak-word-btn');
+  const speakSentenceBtn = document.getElementById('speak-sentence-btn');
 
 
   
@@ -221,11 +237,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show loading state
     translation.textContent = 'Translating word...';
     sentenceTranslation.textContent = 'Translating sentence...';
-    translation.style.display = 'block';
-    sentenceTranslation.style.display = 'block';
+    translation.style.display = 'flex';
+    sentenceTranslation.style.display = 'flex';
     wordPopup.style.display = 'block';
 
-    wordPopup.style.display = 'block';
+    
 
     // Position popup at click position
     positionPopupAtClick(wordPopup);
@@ -432,6 +448,55 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 
+
+  
+  function loadVoices() {
+    voices = speechSynthesis.getVoices();
+  }
+  
+  // Chrome loads voices asynchronously
+  if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = loadVoices;
+  }
+  
+  // Initial load of voices
+  loadVoices();
+  
+  // Function to speak text
+  function speakText(text, lang = 'en-US') {
+    // Cancel any ongoing speech
+    speechSynthesis.cancel();
+    
+    // Create a new utterance
+    const utterance = new SpeechSynthesisUtterance(text);
+    
+    // Set language
+    utterance.lang = lang;
+    
+    // Try to find a matching voice for the language
+    const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]) && !v.localService);
+    if (voice) {
+      utterance.voice = voice;
+    }
+    
+    // Speak the text
+    speechSynthesis.speak(utterance);
+  }
+  
+  // Speak word when button is clicked
+  speakWordBtn.addEventListener('click', function() {
+    if (selectedWord) {
+      speakText(selectedWord);
+    }
+  });
+  
+  // Speak sentence when button is clicked
+  speakSentenceBtn.addEventListener('click', function() {
+    if (selectedSentence) {
+      speakText(selectedSentence);
+    }
+  });
+  
 
 
 });

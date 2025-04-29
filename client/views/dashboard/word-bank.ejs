@@ -48,7 +48,7 @@
                   <tbody>
                     <% groupedWords[letter].forEach(word => { %>
                       <tr>
-                        <td><%= word.word %></td>
+                        <td><%= word.word %><button class="speak-btn btn-sm" data-text="<%= word.word %>"><i class="fas fa-volume-up"></i></button></td>
                         <td><%= word.translation %></td>
                         
                         <td class="wordBankactions">
@@ -77,5 +77,60 @@
     <% } %>
   </div>
 </div>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize speech synthesis
+    const speechSynthesis = window.speechSynthesis;
+    let voices = [];
+    
+    // Load available voices
+    function loadVoices() {
+      voices = speechSynthesis.getVoices();
+    }
+    
+    // Chrome loads voices asynchronously
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = loadVoices;
+    }
+    
+    // Initial load of voices
+    loadVoices();
+    
+    // Function to speak text
+    function speakText(text, lang = 'en-US') {
+      // Cancel any ongoing speech
+      speechSynthesis.cancel();
+      
+      // Create a new utterance
+      const utterance = new SpeechSynthesisUtterance(text);
+      
+      // Set language
+      utterance.lang = lang;
+      
+      // Try to find a matching voice for the language
+      const voice = voices.find(v => v.lang.startsWith(lang.split('-')[0]) && !v.localService);
+      if (voice) {
+        utterance.voice = voice;
+      }
+      
+      // Speak the text
+      speechSynthesis.speak(utterance);
+    }
+    
+    // Add click event to all speak buttons
+    document.querySelectorAll('.speak-btn').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const text = this.getAttribute('data-text');
+        if (text) {
+          speakText(text);
+        }
+      });
+    });
+  });
+</script>
 
 <%- include('../partials/footer') %>
